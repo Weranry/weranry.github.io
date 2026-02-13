@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weranry</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+<body class="home-center">
+  
+  <div class="container">
+    <header class="header">
+      <div class="logo">
+        <a href="/">Weranry</a>
+      </div>
+      <nav class="nav">
+        <a href="/" class="nav-link">首页</a>
+        <a href="/articles/" class="nav-link">文章</a>
+        <a href="/projects/" class="nav-link">项目</a>
+        <a href="/tools/" class="nav-link">工具</a>
+      </nav>
+    </header>
+
+    <main class="main-content">
+      <div class="glass-container">
+  <div class="glass-grid">
+    
+    <!-- Profile / Intro Tile (Large) -->
+    <div class="glass-tile tile-large tile-profile" style="max-height: 460px; overflow: hidden; display: flex; flex-direction: column;">
+      <div class="tile-content" style="flex: 1; overflow: hidden; display: flex; flex-direction: column;">
+        <div class="profile-header" style="flex-shrink: 0;">
+          <div class="profile-avatar">
+            <span>W</span>
+          </div>
+          <div class="profile-text">
+            <h1>Weranry</h1>
+            <p>数字花园</p>
+          </div>
+        </div>
+        <div class="profile-bio" style="flex: 1; overflow-y: auto; overflow-x: hidden; margin-bottom: 20px; padding-right: 5px;">
+          <p>欢迎来到我的个人网站。这里分享我的项目、思考和常用工具。</p>
+        </div>
+        <div class="tile-footer" style="flex-shrink: 0; margin-top: auto;">
+          <a href="#" class="btn-glass">关于我</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Article Tile (Wide) -->
+    
+    <a href="/2021/02/20/%E7%87%83%E6%96%99%E7%94%B5%E6%B1%A0%E8%B4%9F%E6%9E%81%E5%8F%8D%E5%BA%94%E6%96%B9%E7%A8%8B%E5%BC%8F/" class="glass-tile tile-wide tile-article">
+      <div class="tile-header">
+        <span class="tile-icon">📝</span>
+        <span class="tile-label">2021-02-20</span>
+      </div>
+      <div class="tile-content" style="display: flex; flex-direction: column; overflow: hidden; height: 100%;">
+        
+          <h2 style="margin-bottom: 10px; font-size: 1.3rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">关于燃料电池负极反应方程式的简便书写方式</h2>
+          <div class="tile-desc" style="flex: 1; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; line-height: 1.5; margin-bottom: 10px;">
+            首先需要了解1CXHYOZ + (X + Y/4 - Z/2) O2 === XCO2 + Y/2 H2O
+
+即符合 CXHYOZ 通式的物质（X,Y,Z 取值均为自然数）在氧气中燃烧的通式。
+通过此通式配平得到的方程式各项系数不一定为整数，因而需要将其各项系数化为正整数，得到的 CXHYOZ 的系数记为 M 而 O2 的系数记为 N。
+通过燃烧通式以及正极反应同时相减可得到以下负极反应方程式：
+
+          </div>
+          <div style="margin-top: auto; display: flex; justify-content: flex-end; align-items: center;">
+             <span style="font-size: 0.8rem; color: var(--accent-color); font-weight: bold;">阅读全文 &rarr;</span>
+          </div>
+        
+      </div>
+    </a>
+
+    <!-- Recent Project Tile (Medium) -->
+    
+    <a href="/static_projects/pages/woshishabi.html" class="glass-tile tile-medium tile-project">
+      <div class="tile-header">
+        <span class="tile-icon">🚀</span>
+        <span class="tile-label">最新项目</span>
+      </div>
+      <div class="tile-content center-content">
+        
+          <h3 style="text-align:center">我是傻逼</h3>
+          <span class="tag-glass">v1.0.1</span>
+        
+      </div>
+    </a>
+
+    <!-- Tools Tile (Small) -->
+    <a href="/tools" class="glass-tile tile-small tile-tools">
+      <div class="tile-content center-content">
+        <span class="big-icon">🛠️</span>
+        <span class="tile-label-bottom">工具箱</span>
+      </div>
+    </a>
+
+    <div class="glass-tile tile-medium tile-time">
+      <div class="tile-content center-content" style="flex-direction: column; justify-content: center; height: 100%;">
+        <div id="clock-time" style="font-size: 2.5rem; font-weight: 700; color: var(--text-primary); line-height: 1;">00:00</div>
+        <div id="clock-date" style="font-size: 1rem; color: var(--text-secondary); margin-top: 10px;">-月-日 周-</div>
+        <div id="clock-lunar" style="font-size: 0.9rem; color: var(--accent-color); margin-top: 5px; opacity: 0.9; font-weight: 500;">农历加载中...</div>
+      </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/lunar-javascript@1.6.12/lunar.min.js"></script>
+    <script>
+      function updateTime() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const timeEl = document.getElementById('clock-time');
+        if(timeEl) timeEl.textContent = `${hours}:${minutes}`;
+
+        // Date and Weekday
+        const month = now.getMonth() + 1;
+        const day = now.getDate();
+        const weekMap = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+        const dateEl = document.getElementById('clock-date');
+        if(dateEl) dateEl.textContent = `${month}月${day}日 ${weekMap[now.getDay()]}`;
+
+        // Lunar
+        if (typeof Lunar !== 'undefined') {
+          try {
+            const lunar = Lunar.fromDate(now);
+            const lunarMonth = lunar.getMonthInChinese();
+            const lunarDay = lunar.getDayInChinese();
+            let jieqi = "";
+            try { jieqi = lunar.getJieQi(); } catch(e){}
+            
+            let lunarText = `农历${lunarMonth}月${lunarDay}`;
+            if (jieqi && jieqi.length > 0) lunarText += ` · ${jieqi}`;
+            
+            const lunarEl = document.getElementById('clock-lunar');
+            if(lunarEl) lunarEl.textContent = lunarText;
+          } catch(e) { console.error("Lunar Error:", e); }
+        }
+      }
+
+      // Initial update for standard time quickly
+      updateTime();
+      setInterval(updateTime, 10000);
+
+      // Check for library load specifically for Lunar part
+      const checkLunar = setInterval(() => {
+        if (typeof Lunar !== 'undefined') {
+          updateTime(); // Re-run to populate Lunar
+          clearInterval(checkLunar);
+        }
+      }, 200);
+    </script>
+
+    <!-- Articles List Link (Small) -->
+    <a href="/articles" class="glass-tile tile-small tile-all-articles">
+      <div class="tile-content center-content">
+        <span class="big-counter">1</span>
+        <span class="tile-label-bottom">文章归档</span>
+      </div>
+    </a>
+
+    <!-- Search / Extra (Medium) -->
+    <div class="glass-tile tile-medium tile-search">
+       <div class="tile-content center-content">
+          <span class="big-icon">🔍</span>
+          <span class="tile-label-bottom">搜索</span>
+       </div>
+    </div>
+
+  </div>
+</div>
+
+    </main>
+
+    <footer class="footer">
+      <div>&copy; Weranry 2017-2026</div>
+      <div id="runtime-info" style="margin-top: 5px; font-size: 0.8rem; opacity: 0.8;"></div>
+      <script>
+        function showRuntime() {
+          var startTime = new Date("2017/02/20"); 
+          var now = new Date();
+          var diff = now - startTime;
+          var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+          document.getElementById("runtime-info").innerText = "网站已经稳定运行 " + days + " 天";
+        }
+        showRuntime();
+      </script>
+    </footer>
+  </div>
+
+</body>
+</html>
+
