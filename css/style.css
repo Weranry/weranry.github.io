@@ -454,6 +454,21 @@ main {
   line-height: 1.6;
   max-width: 480px;
   animation: fade-up 0.6s 0.15s ease-out both;
+  transition: opacity 0.3s ease;
+}
+
+.hero-subtitle.typewriter-cursor::after {
+  content: '|';
+  animation: cursor-blink 1s step-end infinite;
+}
+
+.hero-subtitle-fade {
+  opacity: 0;
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 .hero .hero-links {
