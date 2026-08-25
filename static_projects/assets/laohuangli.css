@@ -1,332 +1,271 @@
-body * {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+* {
+  box-sizing: border-box;
 }
 
 body {
-    background: linear-gradient(135deg, #6e8efb 0%, #a777e3 100%);
-    margin: 0;
-    padding: 20px 0;
-    min-height: 100vh;
-    color: #333;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: #fafafa;
+  margin: 0;
+  padding: 40px 20px;
+  min-height: 100vh;
+  color: #171717;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Modern card container */
 .container {
-    width: 90%;
-    max-width: 700px;
-    margin: 20px auto 50px;
-    padding: 0;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    position: relative;
-}
-
-.container:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-}
-
-/* 添加光泽效果 */
-.container::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-        to bottom right,
-        rgba(255, 255, 255, 0.3) 0%,
-        rgba(255, 255, 255, 0.1) 50%,
-        transparent 100%
-    );
-    z-index: 1;
-    pointer-events: none;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 32px;
+  background: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .container > .title {
-    position: relative;
-    padding: 18px 20px;
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: #444;
-    text-align: center;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    background: rgba(255, 255, 255, 0.6);
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #171717;
+  text-align: center;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
 }
 
-.container>.title::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 100%);
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.container>.title:hover::after {
-    opacity: 1;
+.container > .title sup {
+  font-size: 0.65rem;
+  font-weight: 400;
+  color: #999;
+  margin-left: 2px;
 }
 
 .date {
-    font-size: 1.4rem;
-    font-weight: 600;
-    line-height: 30pt;
-    text-align: center;
-    padding: 12px 0;
-    background: rgba(0, 0, 0, 0.03);
-    color: #555;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: center;
+  padding: 10px 0;
+  color: #666;
+  border-top: 1px solid #eaeaea;
+  border-bottom: 1px solid #eaeaea;
+  margin-bottom: 24px;
 }
 
 .split, .clear {
-    clear: both;
-    height: 1px;
-    overflow-y: hidden;
+  clear: both;
 }
 
 .good, .bad {
-    clear: both;
-    position: relative;
-    margin: 20px;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    display: block; /* 确保块级显示 */
-    margin-bottom: 30px; /* 增加底部间距 */
-}
-
-.good:hover, .bad:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  display: flex;
+  margin-bottom: 16px;
+  border: 1px solid #eaeaea;
+  border-radius: 6px;
+  overflow: hidden;
 }
 
 .good .title, .bad .title {
-    float: left;
-    width: 80px;
-    font-weight: bold;
-    text-align: center;
-    font-size: 1.8rem;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-.good .title>table, .bad .title>table {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border: none;
+  flex-shrink: 0;
+  width: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.05em;
 }
 
 .good .title {
-    background: linear-gradient(135deg, #FFD36F 0%, #FFAF40 100%);
+  background: #f5a623;
 }
 
 .bad .title {
-    background: linear-gradient(135deg, #FF6B6B 0%, #FF4081 100%);
-    color: #fff;
+  background: #666;
+}
+
+.good .title > table, .bad .title > table {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.good .title > table td, .bad .title > table td {
+  text-align: center;
+  vertical-align: middle;
 }
 
 .good .content, .bad .content {
-    margin-left: 80px;
-    padding: 18px;
-    font-size: 1rem;
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+  flex: 1;
+  padding: 14px 16px;
+  background: #fafafa;
 }
 
-.good {
-    background: rgba(255, 255, 220, 0.5);
-    border-left: 3px solid #FFD36F;
+.good .content ul, .bad .content ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.bad {
-    background: rgba(255, 231, 224, 0.5);
-    border-left: 3px solid #FF6B6B;
+.good .content ul li, .bad .content ul li {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #444;
+  padding: 4px 0;
+  border-bottom: 1px solid #f0f0f0;
 }
 
-.content ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+.good .content ul li:last-child, .bad .content ul li:last-child {
+  border-bottom: none;
 }
 
-.content ul li {
-    line-height: 1.6;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #444;
-    margin-bottom: 15px;
-    padding: 12px 15px;
-    background: rgba(255, 255, 255, 0.6);
-    border-radius: 12px;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    transition: all 0.2s ease;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    display: block; /* 确保每个列表项是块级元素 */
-}
-
-.content ul li:hover {
-    transform: translateX(3px);
-    background: rgba(255, 255, 255, 0.85);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-}
-
-.content ul li div.description {
-    font-size: 0.9rem;
-    font-weight: normal;
-    color: #666;
-    line-height: 1.4;
-    margin-top: 8px;
+.good .content ul li div.description, .bad .content ul li div.description {
+  font-size: 0.75rem;
+  color: #999;
+  line-height: 1.4;
+  margin-top: 4px;
 }
 
 .line-tip {
-    font-size: 1rem;
-    margin: 20px;
-    padding: 16px 20px;
-    line-height: 1.4;
-    background: rgba(255, 255, 255, 0.7);
-    border-radius: 16px;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    transition: all 0.2s ease;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  padding: 10px 0;
+  color: #444;
+  border-bottom: 1px solid #f5f5f5;
 }
 
-.line-tip:hover {
-    transform: translateY(-3px);
-    background: rgba(255, 255, 255, 0.85);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+.line-tip:last-child {
+  border-bottom: none;
 }
 
 .line-tip strong {
-    color: #555;
+  font-weight: 600;
+  color: #171717;
 }
 
 .direction_value {
-    color: #38A169;
-    font-weight: bold;
+  color: #0070f3;
+  font-weight: 600;
 }
 
 .goddes_value, .gods_value {
-    color: #D53F8C;
-    font-weight: bold;
+  color: #7928ca;
+  font-weight: 600;
 }
 
 .trend_value {
-    color: #3182CE;
-    font-weight: bold;
+  color: #0070f3;
+  font-weight: 600;
 }
 
-.drink_value, .eat_value, .book_value, .web_value, .wild_value, 
+.drink_value, .eat_value, .book_value, .web_value, .wild_value,
 .company_and_group, .event_and_meeting, .music_value, .words_powerful {
-    color: #805AD5;
-    font-weight: bold;
+  color: #171717;
+  font-weight: 500;
 }
 
 hr {
-    margin: 20px;
-    border: none;
-    height: 1px;
-    background: rgba(0, 0, 0, 0.08);
-    border-radius: 1px;
+  margin: 0;
+  border: none;
+  height: 1px;
+  background: #eaeaea;
 }
 
 .comment {
-    margin: 20px;
-    font-size: 0.9rem;
-    background: rgba(255, 255, 255, 0.6);
-    border-radius: 16px;
-    padding: 16px 20px;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: 20px;
+  font-size: 0.75rem;
+  color: #999;
+  line-height: 1.6;
 }
 
 .comment ul {
-    margin-left: 0;
-    padding-left: 20px;
-    color: #777;
+  margin: 0;
+  padding-left: 16px;
 }
 
-/* 媒体查询 - 移动设备 */
+.comment ul li {
+  margin-bottom: 4px;
+}
+
 @media (max-width: 600px) {
-    .container {
-        width: 95%;
-        margin: 10px auto 30px;
-    }
-    
-    .good, .bad, .line-tip {
-        margin: 15px;
-    }
-    
-    .good .title, .bad .title {
-        width: 60px;
-        font-size: 1.5rem;
-    }
-    
-    .good .content, .bad .content {
-        margin-left: 60px;
-        padding: 12px;
-    }
-    
-    .content ul li {
-        font-size: 0.95rem;
-        padding: 10px 12px;
-    }
-    
-    .content ul li div.description {
-        font-size: 0.85rem;
-    }
-    
-    .container>.title {
-        font-size: 1.4rem;
-        padding: 15px;
-    }
-    
-    .date {
-        font-size: 1.2rem;
-    }
-    
-    .line-tip {
-        font-size: 0.9rem;
-        padding: 12px 15px;
-    }
+  body {
+    padding: 20px 12px;
+  }
+
+  .container {
+    padding: 20px;
+  }
+
+  .good .title, .bad .title {
+    width: 48px;
+    font-size: 1rem;
+  }
+
+  .good .content, .bad .content {
+    padding: 10px 12px;
+  }
+
+  .good .content ul li, .bad .content ul li {
+    font-size: 0.8rem;
+  }
+
+  .container > .title {
+    font-size: 1.1rem;
+  }
 }
 
-/* 超小屏幕设备 */
-@media (max-width: 360px) {
-    .good .title, .bad .title {
-        width: 50px;
-        font-size: 1.3rem;
-    }
-    
-    .good .content, .bad .content {
-        margin-left: 50px;
-        padding: 10px;
-    }
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #0a0a0a;
+    color: #ededed;
+  }
+
+  .container {
+    background: #171717;
+    border-color: #2a2a2a;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  .container > .title {
+    color: #ededed;
+  }
+
+  .date {
+    color: #888;
+    border-color: #2a2a2a;
+  }
+
+  .good, .bad {
+    border-color: #2a2a2a;
+  }
+
+  .good .content, .bad .content {
+    background: #1a1a1a;
+  }
+
+  .good .content ul li, .bad .content ul li {
+    color: #ccc;
+    border-color: #222;
+  }
+
+  .line-tip {
+    color: #ccc;
+    border-color: #222;
+  }
+
+  .line-tip strong {
+    color: #ededed;
+  }
+
+  hr {
+    background: #2a2a2a;
+  }
+
+  .comment {
+    color: #666;
+  }
+
+  .drink_value, .eat_value, .book_value, .web_value, .wild_value,
+  .company_and_group, .event_and_meeting, .music_value, .words_powerful {
+    color: #ededed;
+  }
 }

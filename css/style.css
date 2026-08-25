@@ -605,25 +605,25 @@ main {
 /* Project Grid */
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
 }
 
 .project-card {
   background: var(--geist-background);
   box-shadow: var(--geist-shadow-card);
-  border-radius: var(--geist-radius-lg);
-  padding: 24px;
+  border-radius: var(--geist-radius);
+  padding: 16px;
   display: flex;
   flex-direction: column;
 }
 
 .project-card-title {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   letter-spacing: -0.02em;
   color: var(--geist-foreground);
-  margin: 0 0 8px;
+  margin: 0 0 6px;
 }
 
 .project-card-title:hover {
@@ -631,12 +631,12 @@ main {
 }
 
 .project-card-desc {
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   font-weight: 400;
   color: var(--geist-secondary);
-  line-height: 1.6;
+  line-height: 1.5;
   flex: 1;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .project-card-meta {
@@ -646,7 +646,7 @@ main {
 }
 
 .project-card-date {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: var(--geist-quaternary);
   font-family: var(--font-mono);
 }
@@ -1342,11 +1342,11 @@ main {
   }
 
   .project-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .project-card {
-    padding: 20px;
+    padding: 14px;
   }
 
   .page-wrap,
