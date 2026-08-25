@@ -1366,7 +1366,7 @@ main {
   }
 
   .hero .hero-subtitle {
-    font-size: 1rem;
+    font-size: 1.0625rem;
   }
 
   .hero-links {
@@ -1412,22 +1412,22 @@ main {
   }
 
   .content {
-    font-size: 0.9375rem;
+    font-size: 1rem;
   }
 
   .content h2 {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
 
   .content h3 {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
   }
 
   .content pre {
     margin: 0 -16px;
     border-radius: 0;
     padding: 16px;
-    font-size: 0.8125rem;
+    font-size: 0.875rem;
   }
 
   .article-list-item {
@@ -1435,7 +1435,7 @@ main {
   }
 
   .article-list-excerpt {
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
   }
 
   .article-filter-bar {
@@ -1502,15 +1502,15 @@ main {
   }
 
   .hero h1 {
-    font-size: 1.5rem;
+    font-size: 1.625rem;
   }
 
   .page-heading {
-    font-size: 1.35rem;
+    font-size: 1.4rem;
   }
 
   .post-title {
-    font-size: 1.35rem;
+    font-size: 1.4rem;
   }
 }
 
