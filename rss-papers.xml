@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Weranry - Papers</title>
+    <link>https://Weranry.github.io</link>
+    <atom:link href="https://Weranry.github.io/rss-papers.xml" rel="self" type="application/rss+xml"/>
+    <description>Weranry - Papers</description>
+    <language>zh</language>
+    <lastBuildDate>Tue, 25 Aug 2026 10:54:49 GMT</lastBuildDate>
+  </channel>
+</rss>

@@ -1570,3 +1570,29 @@ main {
 [data-theme="dark"] .theme-toggle .icon-moon {
   display: none;
 }
+
+/* Footer RSS */
+.footer-rss {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 10px;
+}
+
+.footer-rss-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: var(--geist-quaternary);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.footer-rss-link:hover {
+  color: #f26522;
+}
+
+.footer-rss-link svg {
+  flex-shrink: 0;
+}
