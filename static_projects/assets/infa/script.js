@@ -312,7 +312,7 @@ const scaleFactorSelector = () => store.state.config.scaleFactor;
 const helpContent = {
     shellType: {
         header: '烟花类型',
-        body: '选择将要发射的烟花类型。 选择“随机”是一个不错的选择！'
+        body: '选择将要发射的烟花类型。 选择"随机"是一个不错的选择！'
     },
     shellSize: {
         header: '烟花大小',
@@ -324,7 +324,7 @@ const helpContent = {
     },
     skyLighting: {
         header: '天空照明',
-        body: '烟花爆炸时照亮背景。 如果背景在屏幕上看起来太亮，请尝试将其设置为“暗淡”或“无”。'
+        body: '烟花爆炸时照亮背景。 如果背景在屏幕上看起来太亮，请尝试将其设置为"暗淡"或"无"。'
     },
     scaleFactor: {
         header: '规模',
@@ -336,7 +336,7 @@ const helpContent = {
     },
     finaleMode: {
         header: '结局模式',
-        body: '发射强烈的烟花。 可能会导致延迟。 需要同时启用“自动发射”。'
+        body: '发射强烈的烟花。 可能会导致延迟。 需要同时启用"自动发射"。'
     },
     hideControls: {
         header: '隐藏控制器',
@@ -422,16 +422,6 @@ if (!fullscreenEnabled()) {
 function renderApp(state) {
     const pauseBtnIcon = `#icon-${state.paused ? 'play' : 'pause'}`;
     const soundBtnIcon = `#icon-sound-${soundEnabledSelector() ? 'on' : 'off'}`;
-    /*
-    appNodes.pauseBtnSVG.setAttribute('href', pauseBtnIcon);
-    appNodes.pauseBtnSVG.setAttribute('xlink:href', pauseBtnIcon);
-    appNodes.soundBtnSVG.setAttribute('href', soundBtnIcon);
-    appNodes.soundBtnSVG.setAttribute('xlink:href', soundBtnIcon);
-    appNodes.controls.classList.toggle('hide', state.menuOpen || state.config.hideControls);
-    appNodes.canvasContainer.classList.toggle('blur', state.menuOpen);
-    appNodes.menu.classList.toggle('hide', !state.menuOpen);
-    appNodes.finaleModeFormOption.style.opacity = state.config.autoLaunch ? 1 : 0.32;
-    */
     appNodes.quality.value = state.config.quality;
     appNodes.shellType.value = state.config.shell;
     appNodes.shellSize.value = state.config.size;
@@ -1077,7 +1067,6 @@ function seqSmallBarrage() {
     const randomMainShell = Math.random() < 0.78 ? crysanthemumShell : ringShell;
     const randomSpecialShell = randomFastShell();
 
-    // (cos(x*5π+0.5π)+1)/2 is a custom wave bounded by 0 and 1 used to set varying launch heights
     function launchShell(x, useSpecial) {
         const isRandom = shellNameSelector() === 'Random';
         let shellType = isRandom ?
@@ -1216,15 +1205,12 @@ function handlePointerMove(event) {
 }
 
 function handleKeydown(event) {
-    // P
     if (event.keyCode === 80) {
         togglePause();
     }
-    // O
     else if (event.keyCode === 79) {
         toggleMenu();
     }
-    // Esc
     else if (event.keyCode === 27) {
         toggleMenu(false);
     }
@@ -1236,63 +1222,49 @@ mainStage.addEventListener('pointermove', handlePointerMove);
 window.addEventListener('keydown', handleKeydown);
 
 
-// Account for window resize and custom scale changes.
 function handleResize() {
     const w = window.innerWidth;
     const h = window.innerHeight;
-    // Try to adopt screen size, heeding maximum sizes specified
     const containerW = Math.min(w, MAX_WIDTH);
-    // On small screens, use full device height
     const containerH = w <= 420 ? h : Math.min(h, MAX_HEIGHT);
     appNodes.stageContainer.style.width = containerW + 'px';
     appNodes.stageContainer.style.height = containerH + 'px';
     stages.forEach(stage => stage.resize(containerW, containerH));
-    // Account for scale
     const scaleFactor = scaleFactorSelector();
     stageW = containerW / scaleFactor;
     stageH = containerH / scaleFactor;
 }
 
-// Compute initial dimensions
 handleResize();
-
 window.addEventListener('resize', handleResize);
 
 
-// Dynamic globals
 let currentFrame = 0;
 let speedBarOpacity = 0;
 let autoLaunchTime = 0;
 
 function updateSpeedFromEvent(event) {
     if (isUpdatingSpeed || event.y >= mainStage.height - 44) {
-        // On phones it's hard to hit the edge pixels in order to set speed at 0 or 1, so some padding is provided to make that easier.
         const edge = 16;
         const newSpeed = (event.x - edge) / (mainStage.width - edge * 2);
         simSpeed = Math.min(Math.max(newSpeed, 0), 1);
-        // show speed bar after an update
         speedBarOpacity = 1;
-        // If we updated the speed, return true
         return true;
     }
-    // Return false if the speed wasn't updated
     return false;
 }
 
 
-// Extracted function to keep `update()` optimized
 function updateGlobals(timeStep, lag) {
     currentFrame++;
 
-    // Always try to fade out speed bar
     if (!isUpdatingSpeed) {
-        speedBarOpacity -= lag / 30; // half a second
+        speedBarOpacity -= lag / 30;
         if (speedBarOpacity < 0) {
             speedBarOpacity = 0;
         }
     }
 
-    // auto launch shells
     if (store.state.config.autoLaunch) {
         autoLaunchTime -= timeStep;
         if (autoLaunchTime <= 0) {
@@ -1317,11 +1289,9 @@ function update(frameTime, lag) {
     const sparkDrag = 1 - (1 - Spark.airDrag) * speed;
     const gAcc = timeStep / 1000 * GRAVITY;
     COLOR_CODES_W_INVIS.forEach(color => {
-        // Stars
         const stars = Star.active[color];
         for (let i = stars.length - 1; i >= 0; i = i - 1) {
             const star = stars[i];
-            // Only update each star once per frame. Since color can change, it's possible a star could update twice without this, leading to a "jump".
             if (star.updateFrame === currentFrame) {
                 continue;
             }
@@ -1339,7 +1309,6 @@ function update(frameTime, lag) {
                 star.prevY = star.y;
                 star.x += star.speedX * speed;
                 star.y += star.speedY * speed;
-                // Apply air drag if star isn't "heavy". The heavy property is used for the shell comets.
                 if (!star.heavy) {
                     star.speedX *= starDrag;
                     star.speedY *= starDrag;
@@ -1370,7 +1339,6 @@ function update(frameTime, lag) {
                     }
                 }
 
-                // Handle star transitions
                 if (star.life < star.transitionTime) {
                     if (star.secondColor && !star.colorChanged) {
                         star.colorChanged = true;
@@ -1383,14 +1351,12 @@ function update(frameTime, lag) {
                     }
 
                     if (star.strobe) {
-                        // Strobes in the following pattern: on:off:off:on:off:off in increments of `strobeFreq` ms.
                         star.visible = Math.floor(star.life / star.strobeFreq) % 3 === 0;
                     }
                 }
             }
         }
 
-        // Sparks
         const sparks = Spark.active[color];
         for (let i = sparks.length - 1; i >= 0; i = i - 1) {
             const spark = sparks[i];
@@ -1426,7 +1392,6 @@ function render(speed) {
         colorSky(speed);
     }
 
-    // Account for high DPI screens, and custom scale factor.
     const scaleFactor = scaleFactorSelector();
     trailsCtx.scale(dpr * scaleFactor, dpr * scaleFactor);
     mainCtx.scale(dpr * scaleFactor, dpr * scaleFactor);
@@ -1437,9 +1402,6 @@ function render(speed) {
 
     mainCtx.clearRect(0, 0, width, height);
 
-    // Draw queued burst flashes
-    // These must also be drawn using source-over due to Safari. Seems rendering the gradients using lighten draws large black boxes instead.
-    // Thankfully, these burst flashes look pretty much the same either way.
     while (BurstFlash.active.length) {
         const bf = BurstFlash.active.pop();
 
@@ -1454,10 +1416,8 @@ function render(speed) {
         BurstFlash.returnInstance(bf);
     }
 
-    // Remaining drawing on trails canvas will use 'lighten' blend mode
     trailsCtx.globalCompositeOperation = 'lighten';
 
-    // Draw stars
     trailsCtx.lineWidth = Star.drawWidth;
     trailsCtx.lineCap = isLowQuality ? 'square' : 'round';
     mainCtx.strokeStyle = '#fff';
@@ -1479,7 +1439,6 @@ function render(speed) {
     });
     mainCtx.stroke();
 
-    // Draw sparks
     trailsCtx.lineWidth = Spark.drawWidth;
     trailsCtx.lineCap = 'butt';
     COLOR_CODES.forEach(color => {
@@ -1494,7 +1453,6 @@ function render(speed) {
     });
 
 
-    // Render speed bar if visible
     if (speedBarOpacity) {
         const speedBarHeight = 6;
         mainCtx.globalAlpha = speedBarOpacity;
@@ -1509,8 +1467,6 @@ function render(speed) {
 }
 
 
-// Draw colored overlay based on combined brightness of stars (light up the sky!)
-// Note: this is applied to the canvas container's background-color, so it's behind the particles
 const currentSkyColor = {
     r: 0,
     g: 0,
@@ -1523,17 +1479,12 @@ const targetSkyColor = {
 };
 
 function colorSky(speed) {
-    // The maximum r, g, or b value that will be used (255 would represent no maximum)
     const maxSkySaturation = skyLightingSelector() * 15;
-    // How many stars are required in total to reach maximum sky brightness
     const maxStarCount = 500;
     let totalStarCount = 0;
-    // Initialize sky as black
     targetSkyColor.r = 0;
     targetSkyColor.g = 0;
     targetSkyColor.b = 0;
-    // Add each known color to sky, multiplied by particle count of that color. This will put RGB values wildly out of bounds, but we'll scale them back later.
-    // Also add up total star count.
     COLOR_CODES.forEach(color => {
         const tuple = COLOR_TUPLES[color];
         const count = Star.active[color].length;
@@ -1543,17 +1494,12 @@ function colorSky(speed) {
         targetSkyColor.b += tuple.b * count;
     });
 
-    // Clamp intensity at 1.0, and map to a custom non-linear curve. This allows few stars to perceivably light up the sky, while more stars continue to increase the brightness but at a lesser rate. This is more inline with humans' non-linear brightness perception.
     const intensity = Math.pow(Math.min(1, totalStarCount / maxStarCount), 0.3);
-    // Figure out which color component has the highest value, so we can scale them without affecting the ratios.
-    // Prevent 0 from being used, so we don't divide by zero in the next step.
     const maxColorComponent = Math.max(1, targetSkyColor.r, targetSkyColor.g, targetSkyColor.b);
-    // Scale all color components to a max of `maxSkySaturation`, and apply intensity.
     targetSkyColor.r = targetSkyColor.r / maxColorComponent * maxSkySaturation * intensity;
     targetSkyColor.g = targetSkyColor.g / maxColorComponent * maxSkySaturation * intensity;
     targetSkyColor.b = targetSkyColor.b / maxColorComponent * maxSkySaturation * intensity;
 
-    // Animate changes to color to smooth out transitions.
     const colorChange = 10;
     currentSkyColor.r += (targetSkyColor.r - currentSkyColor.r) / colorChange * speed;
     currentSkyColor.g += (targetSkyColor.g - currentSkyColor.g) / colorChange * speed;
@@ -1565,17 +1511,11 @@ function colorSky(speed) {
 mainStage.addEventListener('ticker', update);
 
 
-// Helper used to semi-randomly spread particles over an arc
-// Values are flexible - `start` and `arcLength` can be negative, and `randomness` is simply a multiplier for random addition.
 function createParticleArc(start, arcLength, count, randomness, particleFactory) {
     const angleDelta = arcLength / count;
-    // Sometimes there is an extra particle at the end, too close to the start. Subtracting half the angleDelta ensures that is skipped.
-    // Would be nice to fix this a better way.
     const end = start + arcLength - (angleDelta * 0.5);
 
     if (end > start) {
-        // Optimization: `angle=angle+angleDelta` vs. angle+=angleDelta
-        // V8 deoptimises with let compound assignment
         for (let angle = start; angle < end; angle = angle + angleDelta) {
             particleFactory(angle + Math.random() * angleDelta * randomness);
         }
@@ -1587,33 +1527,11 @@ function createParticleArc(start, arcLength, count, randomness, particleFactory)
 }
 
 
-/**
- * Helper used to create a spherical burst of particles.
- *
- * @param  {Number} count               The desired number of stars/particles. This value is a suggestion, and the
- *                                      created burst may have more particles. The current algorithm can't perfectly
- *                                      distribute a specific number of points evenly on a sphere's surface.
- * @param  {Function} particleFactory   Called once per star/particle generated. Passed two arguments:
- *                                        `angle`: The direction of the star/particle.
- *                                        `speed`: A multipler for the particle speed, from 0.0 to 1.0.
- * @param  {Number} startAngle=0        For segmented bursts, you can generate only a partial arc of particles. This
- *                                      allows setting the starting arc angle (radians).
- * @param  {Number} arcLength=TAU       The length of the arc (radians). Defaults to a full circle.
- *
- * @return {void}              Returns nothing; it's up to `particleFactory` to use the given data.
- */
 function createBurst(count, particleFactory, startAngle = 0, arcLength = PI_2) {
-    // Assuming sphere with surface area of `count`, calculate various
-    // properties of said sphere (unit is stars).
-    // Radius
     const R = 0.5 * Math.sqrt(count / Math.PI);
-    // Circumference
     const C = 2 * R * Math.PI;
-    // Half Circumference
     const C_HALF = C / 2;
 
-    // Make a series of rings, sizing them as if they were spaced evenly
-    // along the curved surface of a sphere.
     for (let i = 0; i <= C_HALF; i++) {
         const ringAngle = i / C_HALF * PI_HALF;
         const ringSize = Math.cos(ringAngle);
@@ -1622,7 +1540,6 @@ function createBurst(count, particleFactory, startAngle = 0, arcLength = PI_2) {
 
         const angleInc = PI_2 / partsPerFullRing;
         const angleOffset = Math.random() * angleInc + startAngle;
-        // Each particle needs a bit of randomness to improve appearance.
         const maxRandomAngleOffset = angleInc * 0.33;
 
         for (let i = 0; i < partsPerArc; i++) {
@@ -1636,10 +1553,6 @@ function createBurst(count, particleFactory, startAngle = 0, arcLength = PI_2) {
 
 
 
-// Various star effects.
-// These are designed to be attached to a star's `onDeath` event.
-
-// Crossette breaks star into four same-color pieces which branch in a cross-like shape.
 function crossetteEffect(star) {
     const startAngle = Math.random() * PI_HALF;
     createParticleArc(startAngle, PI_2, 4, 0.5, (angle) => {
@@ -1654,7 +1567,6 @@ function crossetteEffect(star) {
     });
 }
 
-// Flower is like a mini shell
 function floralEffect(star) {
     const count = 12 + 6 * quality;
     createBurst(count, (angle, speedMult) => {
@@ -1669,12 +1581,10 @@ function floralEffect(star) {
             star.speedY
         );
     });
-    // Queue burst flash render
     BurstFlash.add(star.x, star.y, 46);
     soundManager.playSound('burstSmall');
 }
 
-// Floral burst with willow stars
 function fallingLeavesEffect(star) {
     createBurst(7, (angle, speedMult) => {
         const newStar = Star.add(
@@ -1694,12 +1604,10 @@ function fallingLeavesEffect(star) {
         newStar.sparkLife = 750;
         newStar.sparkLifeVariation = 3.2;
     });
-    // Queue burst flash render
     BurstFlash.add(star.x, star.y, 46);
     soundManager.playSound('burstSmall');
 }
 
-// Crackle pops into a small cloud of golden sparks.
 function crackleEffect(star) {
     const count = isHighQuality ? 32 : 16;
     createParticleArc(0, PI_2, count, 1.8, (angle) => {
@@ -1708,7 +1616,6 @@ function crackleEffect(star) {
             star.y,
             COLOR.Gold,
             angle,
-            // apply near cubic falloff to speed (places more particles towards outside)
             Math.pow(Math.random(), 0.45) * 2.4,
             300 + Math.random() * 200
         );
@@ -1717,23 +1624,6 @@ function crackleEffect(star) {
 
 
 
-/**
- * Shell can be constructed with options:
- *
- * spreadSize:      Size of the burst.
- * starCount: Number of stars to create. This is optional, and will be set to a reasonable quantity for size if omitted.
- * starLife:
- * starLifeVariation:
- * color:
- * glitterColor:
- * glitter: One of: 'light', 'medium', 'heavy', 'streamer', 'willow'
- * pistil:
- * pistilColor:
- * streamers:
- * crossette:
- * floral:
- * crackle:
- */
 class Shell {
     constructor(options) {
         Object.assign(this, options);
@@ -1741,7 +1631,6 @@ class Shell {
         this.color = options.color || randomColor();
         this.glitterColor = options.glitterColor || this.color;
 
-        // Set default starCount if needed, will be based on shell size and scale exponentially, like a sphere's surface area.
         if (!this.starCount) {
             const density = options.starDensity || 1;
             const scaledSize = this.spreadSize / 54;
@@ -1752,13 +1641,9 @@ class Shell {
     launch(position, launchHeight) {
         const width = stageW;
         const height = stageH;
-        // Distance from sides of screen to keep shells.
         const hpad = 60;
-        // Distance from top of screen to keep shell bursts.
         const vpad = 50;
-        // Minimum burst height, as a percentage of stage height
         const minHeightPercent = 0.45;
-        // Minimum burst height in px
         const minHeight = height - height * minHeightPercent;
 
         const launchX = position * (width - hpad * 2) + hpad;
@@ -1766,8 +1651,6 @@ class Shell {
         const burstY = minHeight - (launchHeight * (minHeight - vpad));
 
         const launchDistance = launchY - burstY;
-        // Using a custom power curve to approximate Vi needed to reach launchDistance under gravity and air drag.
-        // Magic numbers came from testing.
         const launchVelocity = Math.pow(launchDistance * 0.04, 0.64);
 
         const comet = this.comet = Star.add(
@@ -1776,13 +1659,10 @@ class Shell {
             typeof this.color === 'string' && this.color !== 'random' ? this.color : COLOR.White,
             Math.PI,
             launchVelocity * (this.horsetail ? 1.2 : 1),
-            // Hang time is derived linearly from Vi; exact number came from testing
             launchVelocity * (this.horsetail ? 100 : 400)
         );
 
-        // making comet "heavy" limits air drag
         comet.heavy = true;
-        // comet spark trail
         comet.spinRadius = MyMath.random(0.32, 0.85);
         comet.sparkFreq = 32 / quality;
         if (isHighQuality) comet.sparkFreq = 8;
@@ -1797,8 +1677,6 @@ class Shell {
             comet.sparkColor = COLOR.Gold;
         }
 
-        // Randomly make comet "burn out" a bit early.
-        // This is disabled for horsetail shells, due to their very short airtime.
         if (Math.random() > 0.4 && !this.horsetail) {
             comet.secondColor = INVISIBLE;
             comet.transitionTime = Math.pow(Math.random(), 1.5) * 700 + 500;
@@ -1810,12 +1688,10 @@ class Shell {
     }
 
     burst(x, y) {
-        // Set burst speed so overall burst grows to set size. This specific formula was derived from testing, and is affected by simulated air drag.
         const speed = this.spreadSize / 96;
 
         let color, onDeath, sparkFreq, sparkSpeed, sparkLife;
         let sparkLifeVariation = 0.25;
-        // Some death effects, like crackle, play a sound, but should only be played once.
         let playedDeathSound = false;
 
         if (this.crossette) onDeath = (star) => {
@@ -1867,15 +1743,10 @@ class Shell {
             sparkLifeVariation = 3.8;
         }
 
-        // Apply quality to spark count
         sparkFreq = sparkFreq / quality;
 
-        // Star factory for primary burst, pistils, and streamers.
         let firstStar = true;
         const starFactory = (angle, speedMult) => {
-            // For non-horsetail shells, compute an initial vertical speed to add to star burst.
-            // The magic number comes from testing what looks best. The ideal is that all shell
-            // bursts appear visually centered for the majority of the star life (excl. willows etc.)
             const standardInitialSpeed = this.spreadSize / 1800;
 
             const star = Star.add(
@@ -1884,7 +1755,6 @@ class Shell {
                 color || randomColor(),
                 angle,
                 speedMult * speed,
-                // add minor variation to star life
                 this.starLife + Math.random() * this.starLife * this.starLifeVariation,
                 this.horsetail ? this.comet && this.comet.speedX : 0,
                 this.horsetail ? this.comet && this.comet.speedY : -standardInitialSpeed
@@ -1898,8 +1768,6 @@ class Shell {
             if (this.strobe) {
                 star.transitionTime = this.starLife * (Math.random() * 0.08 + 0.46);
                 star.strobe = true;
-                // How many milliseconds between switch of strobe state "tick". Note that the strobe pattern
-                // is on:off:off, so this is the "on" duration, while the "off" duration is twice as long.
                 star.strobeFreq = Math.random() * 20 + 40;
                 if (this.strobeColor) {
                     star.secondColor = this.strobeColor;
@@ -1921,21 +1789,18 @@ class Shell {
 
         if (typeof this.color === 'string') {
             if (this.color === 'random') {
-                color = null; // falsey value creates random color in starFactory
+                color = null;
             } else {
                 color = this.color;
             }
 
-            // Rings have positional randomness, but are rotated randomly
             if (this.ring) {
                 const ringStartAngle = Math.random() * Math.PI;
                 const ringSquash = Math.pow(Math.random(), 2) * 0.85 + 0.15;;
 
                 createParticleArc(0, PI_2, this.starCount, 0, angle => {
-                    // Create a ring, squashed horizontally
                     const initSpeedX = Math.sin(angle) * speed * ringSquash;
                     const initSpeedY = Math.cos(angle) * speed;
-                    // Rotate ring
                     const newSpeed = MyMath.pointDist(0, 0, initSpeedX, initSpeedY);
                     const newAngle = MyMath.pointAngle(0, 0, initSpeedX, initSpeedY) + ringStartAngle;
                     const star = Star.add(
@@ -1943,9 +1808,7 @@ class Shell {
                         y,
                         color,
                         newAngle,
-                        // apply near cubic falloff to speed (places more particles towards outside)
-                        newSpeed, //speed,
-                        // add minor variation to star life
+                        newSpeed,
                         this.starLife + Math.random() * this.starLife * this.starLifeVariation
                     );
 
@@ -1959,7 +1822,6 @@ class Shell {
                     }
                 });
             }
-            // Normal burst
             else {
                 createBurst(this.starCount, starFactory);
             }
@@ -1969,7 +1831,6 @@ class Shell {
                 const start2 = start + Math.PI;
                 const arc = Math.PI;
                 color = this.color[0];
-                // Not creating a full arc automatically reduces star count.
                 createBurst(this.starCount, starFactory, start, arc);
                 color = this.color[1];
                 createBurst(this.starCount, starFactory, start2, arc);
@@ -2008,18 +1869,9 @@ class Shell {
             innerShell.burst(x, y);
         }
 
-        // Queue burst flash render
         BurstFlash.add(x, y, this.spreadSize / 4);
 
-        // Play sound, but only for "original" shell, the one that was launched.
-        // We don't want multiple sounds from pistil or streamer "sub-shells".
-        // This can be detected by the presence of a comet.
         if (this.comet) {
-            // Scale explosion sound based on current shell size and selected (max) shell size.
-            // Shooting selected shell size will always sound the same no matter the selected size,
-            // but when smaller shells are auto-fired, they will sound smaller. It doesn't sound great
-            // when a value too small is given though, so instead of basing it on proportions, we just
-            // look at the difference in size and map it to a range known to sound good.
             const maxDiff = 2;
             const sizeDifferenceFromMaxSize = Math.min(maxDiff, shellSizeSelector() - this.shellSize);
             const soundScale = (1 - sizeDifferenceFromMaxSize / maxDiff) * 0.3 + 0.7;
@@ -2056,8 +1908,6 @@ const BurstFlash = {
 
 
 
-// Helper to generate objects for storing active particles.
-// Particles are stored in arrays keyed by color (code, not name) for improved rendering performance.
 function createParticleCollection() {
     const collection = {};
     COLOR_CODES_W_INVIS.forEach(color => {
@@ -2067,17 +1917,11 @@ function createParticleCollection() {
 }
 
 
-// Star properties (WIP)
-// -----------------------
-// transitionTime - how close to end of life that star transition happens
-
 const Star = {
-    // Visual properties
     drawWidth: 3,
     airDrag: 0.98,
     airDragHeavy: 0.992,
 
-    // Star particles will be keyed by color
     active: createParticleCollection(),
     _pool: [],
 
@@ -2102,7 +1946,7 @@ const Star = {
         instance.spinAngle = Math.random() * PI_2;
         instance.spinSpeed = 0.8;
         instance.spinRadius = 0;
-        instance.sparkFreq = 0; // ms between spark emissions
+        instance.sparkFreq = 0;
         instance.sparkSpeed = 1;
         instance.sparkTimer = 0;
         instance.sparkColor = color;
@@ -2114,27 +1958,21 @@ const Star = {
         return instance;
     },
 
-    // Public method for cleaning up and returning an instance back to the pool.
     returnInstance(instance) {
-        // Call onDeath handler if available (and pass it current star instance)
         instance.onDeath && instance.onDeath(instance);
-        // Clean up
         instance.onDeath = null;
         instance.secondColor = null;
         instance.transitionTime = 0;
         instance.colorChanged = false;
-        // Add back to the pool.
         this._pool.push(instance);
     }
 };
 
 
 const Spark = {
-    // Visual properties
-    drawWidth: 0, // set in `configDidUpdate()`
+    drawWidth: 0,
     airDrag: 0.9,
 
-    // Star particles will be keyed by color
     active: createParticleCollection(),
     _pool: [],
 
@@ -2158,9 +1996,7 @@ const Spark = {
         return instance;
     },
 
-    // Public method for cleaning up and returning an instance back to the pool.
     returnInstance(instance) {
-        // Add back to the pool.
         this._pool.push(instance);
     }
 };
@@ -2176,7 +2012,6 @@ const soundManager = {
             playbackRateMin: 0.85,
             playbackRateMax: 0.95,
             fileNames: [
-
                 'lift1.mp3',
                 'lift2.mp3',
                 'lift3.mp3'
@@ -2235,7 +2070,6 @@ const soundManager = {
             const filePromises = [];
             fileNames.forEach(fileName => {
                 const fileURL = this.baseURL + fileName;
-                // Promise will resolve with decoded audio buffer.
                 const promise = fetch(fileURL)
                     .then(checkStatus)
                     .then(response => response.arrayBuffer())
@@ -2261,44 +2095,21 @@ const soundManager = {
     },
 
     resumeAll() {
-        // Play a sound with no volume for iOS. This 'unlocks' the audio context when the user first enables sound.
         this.playSound('lift', 0);
-        // Chrome mobile requires interaction before starting audio context.
-        // The sound toggle button is triggered on 'touchstart', which doesn't seem to count as a full
-        // interaction to Chrome. I guess it needs a click? At any rate if the first thing the user does
-        // is enable audio, it doesn't work. Using a setTimeout allows the first interaction to be registered.
-        // Perhaps a better solution is to track whether the user has interacted, and if not but they try enabling
-        // sound, show a tooltip that they should tap again to enable sound.
         setTimeout(() => {
             this.ctx.resume();
         }, 250);
     },
 
-    // Private property used to throttle small burst sounds.
     _lastSmallBurstTime: 0,
 
-    /**
-     * Play a sound of `type`. Will randomly pick a file associated with type, and play it at the specified volume
-     * and play speed, with a bit of random variance in play speed. This is all based on `sources` config.
-     *
-     * @param  {string} type - The type of sound to play.
-     * @param  {?number} scale=1 - Value between 0 and 1 (values outside range will be clamped). Scales less than one
-     *                             descrease volume and increase playback speed. This is because large explosions are
-     *                             louder, deeper, and reverberate longer than small explosions.
-     *                             Note that a scale of 0 will mute the sound.
-     */
     playSound(type, scale = 1) {
-        // Ensure `scale` is within valid range.
         scale = MyMath.clamp(scale, 0, 1);
 
-        // Disallow starting new sounds if sound is disabled, app is running in slow motion, or paused.
-        // Slow motion check has some wiggle room in case user doesn't finish dragging the speed bar
-        // *all* the way back.
         if (!canPlaySoundSelector() || simSpeed < 0.95) {
             return;
         }
 
-        // Throttle small bursts, since floral/falling leaves shells have a lot of them.
         if (type === 'burstSmall') {
             const now = Date.now();
             if (now - this._lastSmallBurstTime < 20) {
@@ -2319,10 +2130,7 @@ const soundManager = {
             source.playbackRateMax
         );
 
-        // Volume descreases with scale.
         const scaledVolume = initialVolume * scale;
-        // Playback rate increases with scale. For this, we map the scale of 0-1 to a scale of 2-1.
-        // So at a scale of 1, sound plays normally, but as scale approaches 0 speed approaches double.
         const scaledPlaybackRate = initialPlaybackRate * (2 - scale);
 
         const gainNode = this.ctx.createGain();
@@ -2341,26 +2149,19 @@ const soundManager = {
 
 
 
-// Kick things off.
-
 function setLoadingStatus(status) {
     document.querySelector('.loading-init__status').textContent = status;
 }
 
-// CodePen profile header doesn't need audio, just initialize.
 if (IS_HEADER) {
     init();
 } else {
-    // Allow status to render, then preload assets and start app.
-    //setLoadingStatus('献给你爱的TA ❤');
     setTimeout(() => {
         soundManager.preload()
             .then(
                 init,
                 reason => {
-                    // Codepen preview doesn't like to load the audio, so just init to fix the preview for now.
                     init();
-                    // setLoadingStatus('Error Loading Audio');
                     return Promise.reject(reason);
                 }
             );

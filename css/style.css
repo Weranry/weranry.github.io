@@ -605,7 +605,7 @@ main {
 /* Project Grid */
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 12px;
 }
 
@@ -616,6 +616,31 @@ main {
   padding: 16px;
   display: flex;
   flex-direction: column;
+}
+
+/* Homepage Project Grid - 3 columns, narrower */
+.home-project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.home-project-grid .project-card {
+  padding: 12px;
+}
+
+.home-project-grid .project-card-title {
+  font-size: 0.85rem;
+  margin: 0 0 4px;
+}
+
+.home-project-grid .project-card-desc {
+  font-size: 0.75rem;
+  margin-bottom: 8px;
+}
+
+.home-project-grid .project-card-meta {
+  font-size: 0.7rem;
 }
 
 .project-card-title {
@@ -1342,6 +1367,10 @@ main {
   }
 
   .project-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .home-project-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
