@@ -631,6 +631,7 @@ main {
   padding: 16px;
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 /* Homepage Project Grid - 3 columns, narrower */
@@ -1312,6 +1313,12 @@ main {
   }
 }
 
+@media (max-width: 768px) {
+  .home-project-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
 @media (max-width: 600px) {
   .header {
     padding: 0 16px;
@@ -1379,14 +1386,6 @@ main {
 
   .section-title {
     font-size: 1.25rem;
-  }
-
-  .project-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .home-project-grid {
-    grid-template-columns: repeat(2, 1fr);
   }
 
   .project-card {
@@ -1484,6 +1483,10 @@ main {
 }
 
 @media (max-width: 400px) {
+  .project-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
   .header-logo-text {
     display: none;
   }
