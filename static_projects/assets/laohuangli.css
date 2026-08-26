@@ -1,0 +1,271 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: #fafafa;
+  margin: 0;
+  padding: 40px 20px;
+  min-height: 100vh;
+  color: #171717;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 32px;
+  background: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.container > .title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #171717;
+  text-align: center;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+
+.container > .title sup {
+  font-size: 0.65rem;
+  font-weight: 400;
+  color: #999;
+  margin-left: 2px;
+}
+
+.date {
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: center;
+  padding: 10px 0;
+  color: #666;
+  border-top: 1px solid #eaeaea;
+  border-bottom: 1px solid #eaeaea;
+  margin-bottom: 24px;
+}
+
+.split, .clear {
+  clear: both;
+}
+
+.good, .bad {
+  display: flex;
+  margin-bottom: 16px;
+  border: 1px solid #eaeaea;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.good .title, .bad .title {
+  flex-shrink: 0;
+  width: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+
+.good .title {
+  background: #f5a623;
+}
+
+.bad .title {
+  background: #666;
+}
+
+.good .title > table, .bad .title > table {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.good .title > table td, .bad .title > table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.good .content, .bad .content {
+  flex: 1;
+  padding: 14px 16px;
+  background: #fafafa;
+}
+
+.good .content ul, .bad .content ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.good .content ul li, .bad .content ul li {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: #444;
+  padding: 4px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.good .content ul li:last-child, .bad .content ul li:last-child {
+  border-bottom: none;
+}
+
+.good .content ul li div.description, .bad .content ul li div.description {
+  font-size: 0.75rem;
+  color: #999;
+  line-height: 1.4;
+  margin-top: 4px;
+}
+
+.line-tip {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  padding: 10px 0;
+  color: #444;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.line-tip:last-child {
+  border-bottom: none;
+}
+
+.line-tip strong {
+  font-weight: 600;
+  color: #171717;
+}
+
+.direction_value {
+  color: #0070f3;
+  font-weight: 600;
+}
+
+.goddes_value, .gods_value {
+  color: #7928ca;
+  font-weight: 600;
+}
+
+.trend_value {
+  color: #0070f3;
+  font-weight: 600;
+}
+
+.drink_value, .eat_value, .book_value, .web_value, .wild_value,
+.company_and_group, .event_and_meeting, .music_value, .words_powerful {
+  color: #171717;
+  font-weight: 500;
+}
+
+hr {
+  margin: 0;
+  border: none;
+  height: 1px;
+  background: #eaeaea;
+}
+
+.comment {
+  margin-top: 20px;
+  font-size: 0.75rem;
+  color: #999;
+  line-height: 1.6;
+}
+
+.comment ul {
+  margin: 0;
+  padding-left: 16px;
+}
+
+.comment ul li {
+  margin-bottom: 4px;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 20px 12px;
+  }
+
+  .container {
+    padding: 20px;
+  }
+
+  .good .title, .bad .title {
+    width: 48px;
+    font-size: 1rem;
+  }
+
+  .good .content, .bad .content {
+    padding: 10px 12px;
+  }
+
+  .good .content ul li, .bad .content ul li {
+    font-size: 0.8rem;
+  }
+
+  .container > .title {
+    font-size: 1.1rem;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #0a0a0a;
+    color: #ededed;
+  }
+
+  .container {
+    background: #171717;
+    border-color: #2a2a2a;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  .container > .title {
+    color: #ededed;
+  }
+
+  .date {
+    color: #888;
+    border-color: #2a2a2a;
+  }
+
+  .good, .bad {
+    border-color: #2a2a2a;
+  }
+
+  .good .content, .bad .content {
+    background: #1a1a1a;
+  }
+
+  .good .content ul li, .bad .content ul li {
+    color: #ccc;
+    border-color: #222;
+  }
+
+  .line-tip {
+    color: #ccc;
+    border-color: #222;
+  }
+
+  .line-tip strong {
+    color: #ededed;
+  }
+
+  hr {
+    background: #2a2a2a;
+  }
+
+  .comment {
+    color: #666;
+  }
+
+  .drink_value, .eat_value, .book_value, .web_value, .wild_value,
+  .company_and_group, .event_and_meeting, .music_value, .words_powerful {
+    color: #ededed;
+  }
+}
