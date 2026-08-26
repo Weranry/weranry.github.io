@@ -143,7 +143,7 @@ img {
 }
 
 .header-logo-text {
-  font-size: 1.15rem;
+  font-size: 1rem;
   font-weight: 600;
   letter-spacing: -0.02em;
 }
@@ -160,7 +160,7 @@ img {
 }
 
 .header-nav a {
-  font-size: 0.925rem;
+  font-size: 0.875rem;
   font-weight: 500;
   color: var(--geist-secondary);
   padding: 6px 12px;
@@ -645,22 +645,8 @@ main {
   padding: 12px;
 }
 
-.home-project-grid .project-card-title {
-  font-size: 0.85rem;
-  margin: 0 0 4px;
-}
-
-.home-project-grid .project-card-desc {
-  font-size: 0.75rem;
-  margin-bottom: 8px;
-}
-
-.home-project-grid .project-card-meta {
-  font-size: 0.7rem;
-}
-
 .project-card-title {
-  font-size: 0.95rem;
+  font-size: 0.9375rem;
   font-weight: 600;
   letter-spacing: -0.02em;
   color: var(--geist-foreground);
@@ -672,7 +658,7 @@ main {
 }
 
 .project-card-desc {
-  font-size: 0.8rem;
+  font-size: 0.8125rem;
   font-weight: 400;
   color: var(--geist-secondary);
   line-height: 1.5;
@@ -687,7 +673,7 @@ main {
 }
 
 .project-card-date {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: var(--geist-quaternary);
   font-family: var(--font-mono);
 }
@@ -1055,7 +1041,7 @@ main {
   background: var(--geist-code-bg);
   box-shadow: var(--geist-shadow-border);
   border-radius: var(--geist-radius);
-  font-size: 0.95rem;
+  font-size: 0.9375rem;
 }
 
 .content mjx-container:not([display="true"]) {
@@ -1416,11 +1402,11 @@ main {
   }
 
   .content h2 {
-    font-size: 1.4rem;
+    font-size: 1.25rem;
   }
 
   .content h3 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 
   .content pre {
