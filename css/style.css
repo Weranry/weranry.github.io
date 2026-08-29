@@ -606,11 +606,11 @@ main {
 }
 
 .article-feed-title {
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 1.25rem;
+  font-weight: 600;
   color: var(--geist-foreground);
-  letter-spacing: -0.01em;
-  line-height: 1.4;
+  letter-spacing: -0.02em;
+  line-height: 1.33;
 }
 
 .article-feed-title:hover {
@@ -646,7 +646,7 @@ main {
 }
 
 .project-card-title {
-  font-size: 0.9375rem;
+  font-size: 1.25rem;
   font-weight: 600;
   letter-spacing: -0.02em;
   color: var(--geist-foreground);
@@ -658,10 +658,10 @@ main {
 }
 
 .project-card-desc {
-  font-size: 0.8125rem;
+  font-size: 0.9375rem;
   font-weight: 400;
   color: var(--geist-secondary);
-  line-height: 1.5;
+  line-height: 1.6;
   flex: 1;
   margin-bottom: 12px;
 }
@@ -1458,8 +1458,24 @@ main {
     gap: 6px;
   }
 
+  .article-feed-title {
+    font-size: 1.1rem;
+  }
+
+  .project-card-title {
+    font-size: 1.1rem;
+  }
+
+  .project-card-desc {
+    font-size: 0.875rem;
+  }
+
   .footer-social {
     gap: 12px;
+  }
+
+  .github-contributions {
+    padding: 12px;
   }
 
   .footer-social a {
@@ -1503,6 +1519,26 @@ main {
 /* ========================================
    Dark Mode
    ======================================== */
+
+/* GitHub Contributions */
+.github-contributions {
+  background: var(--geist-background);
+  box-shadow: var(--geist-shadow-card);
+  border-radius: var(--geist-radius-lg);
+  padding: 20px;
+  overflow: hidden;
+}
+
+.github-contrib-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--geist-radius);
+}
+
+[data-theme="dark"] .github-contrib-img {
+  filter: invert(0.88) hue-rotate(180deg);
+}
 
 [data-theme="dark"] .header {
   background: rgba(10, 10, 10, 0.85);
