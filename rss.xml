@@ -9,13 +9,13 @@
     <atom:link href="https://weranry.github.io/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Tue, 20 Oct 2026 14:56:24 GMT</pubDate>
+    <pubDate>Tue, 20 Oct 2026 15:09:08 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
       <title>用 Python 绘制盈亏月相：从直觉误区到闭合多边形方案</title>
-      <link>https://weranry.github.io/posts/R0001/</link>
-      <guid>https://weranry.github.io/posts/R0001/</guid>
+      <link>https://weranry.github.io/posts/T0001/</link>
+      <guid>https://weranry.github.io/posts/T0001/</guid>
       <pubDate>Mon, 19 Oct 2026 16:00:00 GMT</pubDate>
       
         
@@ -34,7 +34,7 @@
       <category domain="https://Weranry.github.io/tags/Python/">Python</category>
       
       
-      <comments>https://weranry.github.io/posts/R0001/#disqus_thread</comments>
+      <comments>https://weranry.github.io/posts/T0001/#disqus_thread</comments>
       
     </item>
     
