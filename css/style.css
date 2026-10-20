@@ -590,6 +590,7 @@ main {
   background: var(--geist-background);
   box-shadow: var(--geist-shadow-card);
   border-radius: var(--geist-radius-lg);
+  height: 68px;
 }
 
 .article-feed-item:hover {
@@ -606,11 +607,11 @@ main {
 }
 
 .article-feed-title {
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 500;
   color: var(--geist-foreground);
-  letter-spacing: -0.02em;
-  line-height: 1.33;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
 }
 
 .article-feed-title:hover {
@@ -632,6 +633,7 @@ main {
   display: flex;
   flex-direction: column;
   min-width: 0;
+  height: 156px;
 }
 
 /* Homepage Project Grid - 3 columns, narrower */
@@ -646,11 +648,14 @@ main {
 }
 
 .project-card-title {
-  font-size: 1.25rem;
+  font-size: 0.9375rem;
   font-weight: 600;
   letter-spacing: -0.02em;
   color: var(--geist-foreground);
   margin: 0 0 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .project-card-title:hover {
@@ -658,12 +663,16 @@ main {
 }
 
 .project-card-desc {
-  font-size: 0.9375rem;
+  font-size: 0.8125rem;
   font-weight: 400;
   color: var(--geist-secondary);
-  line-height: 1.6;
+  line-height: 1.5;
   flex: 1;
   margin-bottom: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .project-card-meta {
@@ -718,6 +727,7 @@ main {
   background: var(--geist-background);
   box-shadow: var(--geist-shadow-card);
   border-radius: var(--geist-radius-lg);
+  height: 160px;
 }
 
 .article-list-date {
@@ -843,6 +853,10 @@ main {
   font-weight: 400;
   color: var(--geist-secondary);
   line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* ========================================
@@ -1458,24 +1472,8 @@ main {
     gap: 6px;
   }
 
-  .article-feed-title {
-    font-size: 1.1rem;
-  }
-
-  .project-card-title {
-    font-size: 1.1rem;
-  }
-
-  .project-card-desc {
-    font-size: 0.875rem;
-  }
-
   .footer-social {
     gap: 12px;
-  }
-
-  .github-contributions {
-    padding: 12px;
   }
 
   .footer-social a {
@@ -1519,26 +1517,6 @@ main {
 /* ========================================
    Dark Mode
    ======================================== */
-
-/* GitHub Contributions */
-.github-contributions {
-  background: var(--geist-background);
-  box-shadow: var(--geist-shadow-card);
-  border-radius: var(--geist-radius-lg);
-  padding: 20px;
-  overflow: hidden;
-}
-
-.github-contrib-img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: var(--geist-radius);
-}
-
-[data-theme="dark"] .github-contrib-img {
-  filter: invert(0.88) hue-rotate(180deg);
-}
 
 [data-theme="dark"] .header {
   background: rgba(10, 10, 10, 0.85);
