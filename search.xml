@@ -1,191 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>你为什么考不上985 211？</title>
-    <url>/posts/Z0001/</url>
-    <content><![CDATA[<p>如果想得不深入，始终停留在表层，那最终得出的结论也是垃圾。<br>普通学校的高中生考不了985 211，这只是一个表面现象，实际上应该是，普通学校的高中生，在被身边的垃圾和傻逼们同化的情况下，跟着普通学校的垃圾老师去学，跟着普通学校的进度去学，考不了985 211。<br>智商其实并不是最关键的因素，平台或者说环境才是，当你因为初中作死，中考失利考进这所烂高中的时候(想想你为什么会失利，因为你初中就是个垃圾学校)，其实就已经与你身边的垃圾和傻逼们一样，步入了相似的命运轨迹，如果你非要沿着这条和别人高度相似的命运轨迹走下去，没有掀桌子的勇气，得过且过，那自然考不了985 211。<br>普通学校学生难上211 985有三大障碍，首先是老师，如果学会正视老师，破除对老师的盲目崇拜，就会发现老师其实也就两种功能，第一种功能是把课本上的基础知识介绍给你，很多学校的老师就连这一点都做不好，板书还要对着教案照猫画虎的，直接引用课本原文不管你们听不听得懂的，念教辅念PPT的，基本就这种类型，在这种人手下你不自学，不自己折腾，还怀着不知道被谁灌输的“只要踏踏实实跟着老师学，就能怎么怎么样”这样单纯的想法，想出人头地，是根本不可能的，第二种是教你学会应试，可问题在于很多老师自己都不会应试，高考成绩本身就那个逼样，凭着不知道哪里听来的经验瞎扯一通就完事了嗷（比如哪哪状元背了十遍历史书什么的），其次是你身边的傻逼们，傻逼们聚在一起，是不会产生化学反应诞生出天才来的，而且还会把你同化，变得和他们一样傻逼，你要是有点进取心，想做出点改变，他们就会跟看见什么稀奇玩意似的，立马凑上来烦死你，心理变态点的还会想办法整你，毕竟这个班，不允许有比傻逼们牛逼的人存在，成功者永远是少数，想成功绝对得跟身边的傻逼们不一样，在学习这件事上划清界限（当然不等于要跟人家闹翻）<br>最后就是垃圾的学校，学校垃圾就没有钱，也就舍不得花钱买质量高的练习册（搞不好还要吃点回扣什么的），解析几个字就一笔带过，看不懂拉倒恶性循环，学校垃圾老师也垃圾，出出来的题目也是垃圾，简单得要死，很多人做这种垃圾题目考得不错还自以为很牛逼，大考的时候才知道自己有多垃圾，一个月考一次，有时候还不考，连周考都没有，学生能不能从仅有的几次考试中培养出应试能力关我屁事，差不多就这样，普通人跟着这种进度走，能考211 985就见鬼了。<br>不过有一说一，烂学校或者好学校里的烂班级有一点好，那就是自由（当然你们学校又垃圾管得又严当我没说），这其实是一个巨大的机会，就看你抓不抓得住了，因为这种所谓的自由给了聪明人，自主选择老师，自主安排进度，自主选择练习题和试卷，自主实验学习方法的机，如果你所在的学校很牛逼，但是老师不对你胃口（虽然人家可能很牛逼），大家的进度你跟不上，作业和考试多得你想吐，连整理的时间都没有，因为各种原因感到压抑，那么你调整的空间就不会很大，甚至一步错步步错，自主选择老师，自主安排进度，自主选择练习题和试卷，自主实验学习方法其实很简单，网课到处都是，学霸们平时怎么学，衡水中学的日程表网上也有，好的练习册不会淘宝？名校的模拟题不会自己去找？<br>道理就摆在这儿，至于最后能不能做到，那就是你自己的事了。</p>
-]]></content>
-      <tags>
-        <tag>牢骚</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>用 Python 绘制盈亏月相：从直觉误区到闭合多边形方案</title>
-    <url>/posts/T0001/</url>
-    <content><![CDATA[<blockquote>
-<p>初衷很简单：给定任意日期，画出一轮和现实一致的月亮——盈亏大小、月牙朝向都贴合肉眼所见。<br>最开始我本能想到用两个圆裁切，一路踩坑，最后找到了一套简洁自洽的实现思路。整个过程整理于此，希望能帮后来者少走弯路。</p>
-</blockquote>
-<h2 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h2><p>我想用 Python 画月亮。不是随手画一个圆形贴纸，而是<strong>由日期驱动的真实月相</strong>：什么时候是细月牙、什么时候是弦月、亮面朝左还是朝右，都和我们抬头看见的一致。</p>
-<p>一开始以为这是个小任务。从「两个圆互相裁剪」这个很自然的想法起步，一路碰壁，最后收敛到一套足够优雅的算法。我把完整思考链路记录下来。</p>
-<h2 id="一、先厘清核心：月相的成因"><a href="#一、先厘清核心：月相的成因" class="headerlink" title="一、先厘清核心：月相的成因"></a>一、先厘清核心：月相的成因</h2><p>动笔写代码之前，得先分清一件极易混淆的事：<br><strong>日常的阴晴圆缺，不是地球影子挡住月亮（那是月食，一年仅有少数几次）。</strong></p>
-<p>月球本身不发光，只有朝向太阳的半球被照亮。我们站在地球上观察，看到的亮面占比随相对角度持续变化，这就是月相。<br>我们用<strong>相位角</strong>描述太阳-月球-地球三者的几何关系：</p>
-<table>
-<thead>
-<tr>
-<th>相位角</th>
-<th>月相</th>
-<th>简要说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>0°</td>
-<td>新月（朔）</td>
-<td>几乎不可见，日月同升同落</td>
-</tr>
-<tr>
-<td>0°–90°</td>
-<td>蛾眉月</td>
-<td>右侧细月牙，傍晚见于西天</td>
-</tr>
-<tr>
-<td>90°</td>
-<td>上弦月</td>
-<td>右半侧明亮</td>
-</tr>
-<tr>
-<td>90°–180°</td>
-<td>盈凸月</td>
-<td>持续向满月靠近</td>
-</tr>
-<tr>
-<td>180°</td>
-<td>满月（望）</td>
-<td>整个月面全亮</td>
-</tr>
-<tr>
-<td>180°–270°</td>
-<td>亏凸月</td>
-<td>亮面逐步缩小</td>
-</tr>
-<tr>
-<td>270°</td>
-<td>下弦月</td>
-<td>左半侧明亮</td>
-</tr>
-<tr>
-<td>270°–360°</td>
-<td>残月</td>
-<td>左侧细月牙，凌晨见于东天</td>
-</tr>
-</tbody></table>
-<p>新月到下一次新月的平均周期为 <strong>29.530588853 天</strong>，称为<strong>朔望月</strong>。<br>选定一个已知新月的儒略日作为基准，用当前儒略日对朔望月取模，即可得到月龄，换算相位角。下面是最简版本的计算公式：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">SYNODIC_MONTH = <span class="number">29.530588853</span></span><br><span class="line">REFERENCE_NEW_MOON_JD = <span class="number">2451550.1</span></span><br><span class="line">moon_age = (jd - REFERENCE_NEW_MOON_JD) % SYNODIC_MONTH</span><br><span class="line">phase_angle = moon_age / SYNODIC_MONTH * <span class="number">360.0</span></span><br></pre></td></tr></table></figure>
-
-<p>还有一个实用公式，用来计算亮面占整个月轮的比例：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">照亮占比 = (1 - cos(相位角)) / 2</span><br></pre></td></tr></table></figure>
-<p>在 0°、180° 分别得到 0 和 100%；90°、270° 刚好 50%，和上弦、下弦月对半亮的观感吻合。</p>
-<h2 id="二、第一思路：双圆裁切，看似可行，实则走不通"><a href="#二、第一思路：双圆裁切，看似可行，实则走不通" class="headerlink" title="二、第一思路：双圆裁切，看似可行，实则走不通"></a>二、第一思路：双圆裁切，看似可行，实则走不通</h2><p>拿到相位角之后，最先冒出来的想法非常直观：<br>满月是一个整圆；想要月牙，就叠加另一个圆形盖住一部分，剩下露出的区域就是月相。弦月看上去，本来就像是两段圆弧围出来的形状。</p>
-<p>但真正动手才发现这个方案有两处硬伤：</p>
-<ol>
-<li><strong>形状本身不对</strong>：双圆裁切得到的明暗分界线是圆弧；而真实月面的明暗交界线（晨昏线&#x2F;terminator）曲率是连续变化的，90°弦月时会退化成一条直线。无论怎么调整两个圆的大小位置，都无法复刻这条边界。</li>
-<li><strong>绘图原语受限</strong>：常规绘图库的圆弧接口只能绘制固定片段，很难精准取出任意一段弧，再和另一段弧线无缝拼接成可填充的闭合图形。</li>
-</ol>
-<p>这个方案就此搁置。</p>
-<h2 id="三、修正认知：明暗分界线，是一个椭圆的半弧"><a href="#三、修正认知：明暗分界线，是一个椭圆的半弧" class="headerlink" title="三、修正认知：明暗分界线，是一个椭圆的半弧"></a>三、修正认知：明暗分界线，是一个椭圆的半弧</h2><p>跳出「两个圆」的思维定式，从三维几何重新理解：<br>月球是球体，太阳光在球面上切出的明暗分界是球面上的大圆。<strong>这个大圆投影到我们的观测平面上，就是椭圆。</strong> 我们肉眼看到的明暗界线，本质上是这个椭圆的一半，椭圆的扁率随着相位角持续改变。</p>
-<p>设月球视半径为 <code>R</code>、相位角为 <code>θ</code>，该椭圆的半横轴长度为：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">半横轴 = R · cos θ</span><br></pre></td></tr></table></figure>
-
-<p>代入几个极值验证，逻辑自洽：</p>
-<ul>
-<li><code>θ = 0°</code>（新月）：<code>cosθ=1</code>，分界线和月轮外缘重合，几乎没有亮面；</li>
-<li><code>θ = 90°</code>（上弦月）：<code>cosθ=0</code>，椭圆坍缩为一条竖直线，正好对半照亮；</li>
-<li><code>θ = 180°</code>（满月）：<code>cosθ=-1</code>，分界线翻转到另一侧外缘，整轮全部亮起。</li>
-</ul>
-<p>公式里的负号是关键：它代表明暗边界翻转到对面，对应月相由盈转亏。</p>
-<p>到这里，亮区的几何定义已经清晰：<strong>外侧是月轮的一段圆弧，内侧是半段椭圆弧，两段弧线共同围成亮区。</strong><br>但新问题又来了：两段弧线在上下极点处相切，直接拼接填充极易出现细微缝隙；同时又回到老问题——绘图工具很难直接拼接两段不同类型的弧线。</p>
-<h2 id="四、放弃弧线拼接：采样点位，生成一条闭合多边形"><a href="#四、放弃弧线拼接：采样点位，生成一条闭合多边形" class="headerlink" title="四、放弃弧线拼接：采样点位，生成一条闭合多边形"></a>四、放弃弧线拼接：采样点位，生成一条闭合多边形</h2><p>既然用弧线拼接的路子处处受限，我换了策略：不再组合图形原语，直接构造一条连续的闭合轮廓。</p>
-<p>分别对外侧月轮边缘、内侧明暗椭圆界线进行等角度采样，得到两组坐标点；再把界线的点位倒序拼接，首尾相连，形成一条不自交的闭合路径。直接填充这个多边形，不需要依赖弧线接口，也从根源避免拼接缝隙。</p>
-<p>在参数 <code>t</code> 对应的高度位置，外缘和明暗界线横坐标：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">外缘（月轮边缘 limb）： x = ±R·sin t</span><br><span class="line">明暗界线（晨昏线 terminator）：x = ±R·cos θ·sin t</span><br></pre></td></tr></table></figure>
-<p>正负号由相位角判定：<code>θ &lt; 180°</code>，亮区在右侧，取正；反之亮区在左侧，取负。<br>采样、拼合路径的核心函数：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">_lit_polygon</span>(<span class="params">angle, center, radius</span>):</span><br><span class="line">    k = math.cos(math.radians(angle))</span><br><span class="line">    steps = <span class="built_in">max</span>(<span class="number">360</span>, <span class="built_in">int</span>(radius))</span><br><span class="line">    limb, terminator = [], []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(steps + <span class="number">1</span>):</span><br><span class="line">        t = math.pi * i / steps</span><br><span class="line">        y = center - radius * math.cos(t)</span><br><span class="line">        sin_t = math.sin(t)</span><br><span class="line">        <span class="keyword">if</span> angle &lt; <span class="number">180</span>:</span><br><span class="line">            <span class="comment"># 亮面朝右</span></span><br><span class="line">            limb.append((center + radius * sin_t, y))</span><br><span class="line">            terminator.append((center + radius * k * sin_t, y))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 亮面朝左</span></span><br><span class="line">            limb.append((center - radius * sin_t, y))</span><br><span class="line">            terminator.append((center - radius * k * sin_t, y))</span><br><span class="line">    <span class="comment"># 界线点位反向拼接，在极点闭合轮廓</span></span><br><span class="line">    <span class="keyword">return</span> limb + terminator[::-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
-
-<p>轮廓线条要放在填充之后绘制，防止轮廓线覆盖、切断月牙两极的收口。</p>
-<h2 id="五、图像干净度的关键：先超采样、变换，最后一次性二值化"><a href="#五、图像干净度的关键：先超采样、变换，最后一次性二值化" class="headerlink" title="五、图像干净度的关键：先超采样、变换，最后一次性二值化"></a>五、图像干净度的关键：先超采样、变换，最后一次性二值化</h2><p>我想要干净锐利、适合用作图标、素材的黑白月相图。二值图最容易踩的坑是操作顺序颠倒：先压缩成黑白，再做旋转，弧线会出现严重锯齿，细轮廓甚至断裂。</p>
-<p>正确的流水线顺序固定为四步，顺序不能调换：</p>
-<ol>
-<li>在 4 倍超采样的高画布上绘制多边形，保留灰度过渡余量；</li>
-<li>在高分辨率画布上执行旋转（BICUBIC 插值）；</li>
-<li>降采样到目标尺寸（LANCZOS，保证边缘平滑）；</li>
-<li>最后只做一次二值化：亮度≥128置白，其余透明。</li>
-</ol>
-<p>4倍超采样是性价比很高的选择，倍率再高，画质提升有限，但运算成本成倍上涨。核心原则：<strong>所有几何变换，都要在灰度高分辨率阶段完成，二值化放在最后一步。</strong></p>
-<h2 id="六、朝向：月相倾角和观测纬度有关，南北半球观感翻转"><a href="#六、朝向：月相倾角和观测纬度有关，南北半球观感翻转" class="headerlink" title="六、朝向：月相倾角和观测纬度有关，南北半球观感翻转"></a>六、朝向：月相倾角和观测纬度有关，南北半球观感翻转</h2><p>形状算法搞定之后，还有一个很容易忽略的变量：月亮的倾斜角度。<br>同一个时刻的月亮，在赤道、我国北方、南半球悉尼看到的朝向并不一样：</p>
-<ul>
-<li>观测纬度决定月面整体的倾斜角度；</li>
-<li>南半球的观感不是轻微偏转，而是整体上下翻转。</li>
-</ul>
-<p>简易旋转计算：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">rotation = -lat</span><br><span class="line"><span class="keyword">if</span> lat &lt; <span class="number">0</span>:</span><br><span class="line">    rotation += <span class="number">180.0</span></span><br></pre></td></tr></table></figure>
-<p>再次强调：旋转操作必须放在高分辨率超采样阶段，不能在已经二值化的低分辨率图上旋转，否则锯齿、断线问题会复现。</p>
-<h2 id="七、精度取舍：平均朔望月够用吗？什么时候要接入星历？"><a href="#七、精度取舍：平均朔望月够用吗？什么时候要接入星历？" class="headerlink" title="七、精度取舍：平均朔望月够用吗？什么时候要接入星历？"></a>七、精度取舍：平均朔望月够用吗？什么时候要接入星历？</h2><p>到这一步，月亮的视觉效果已经足够逼真，但前面的相位角，还在用线性的平均朔望月公式计算。<br>这套简化模型误差大约半天。对于画图本身完全无感：在一百多像素的图上，半天对应的相位误差只有 2°左右，肉眼分辨不出差别。</p>
-<p>促使我放弃简化公式的不是图像，而是附加信息：我还需要在图上标注「下次满月：xx点xx分」这类时间。<br>实测对比：真实满月 UTC 时刻为 04:12，均值公式算出是前一日 23:45，偏差约4.4小时；新月的误差甚至能接近11小时。弧线看不出差别，但给到用户阅读的时间标签，差几个小时就是硬错误。</p>
-<p>于是引入 JPL DE421 星历：直接读取太阳、月球的真实位置，用黄经差计算精确相位角；新月、满月时刻用二分法求解，精度收敛到分钟级别，误差从小时级压缩到十几秒。<br>代价是引入十几MB的星历文件和天文计算依赖，所以代码做了降级兜底：星历缺失、依赖不可用时，自动回退到朔望月平均公式，图像照常生成，只是时间标签回到有几小时误差的状态。</p>
-<p>这里得到一个很有意思的结论：精度需求，不由图片分辨率决定，而是由输出信息的用途决定。画一轮月牙，2°的误差无关紧要；标注一个具体时刻，几小时偏差就无法接受。</p>
-<h2 id="八、小结"><a href="#八、小结" class="headerlink" title="八、小结"></a>八、小结</h2><p>回看整个实现过程，真正的突破不是某个复杂公式，而是两次思路转换：</p>
-<ol>
-<li>从「用多个基础图形拼接月相」，转为「直接采样轮廓点，构造一条闭合多边形」。弧线本身很难组合，采样点的路径方案绕开了绘图原语的限制；</li>
-<li>从「先二值化再变换」，转为「全部几何变换前置，二值化放在最后一步」，锯齿、轮廓断裂这些表象问题，找到了底层原因。</li>
-</ol>
-<p>最终画出来的月亮并不大，通常只有一百多像素，当然渲染不出环形山。但它能在对应的日期、对应观测地点，呈现出正确的盈亏形态与倾斜朝向。对一段 Python 写出来的小可视化来说，这就足够了。</p>
-]]></content>
-      <tags>
-        <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于燃料电池负极反应方程式的简便书写方式</title>
-    <url>/posts/A0001/</url>
-    <content><![CDATA[<h2 id="有机物燃烧通式"><a href="#有机物燃烧通式" class="headerlink" title="有机物燃烧通式"></a>有机物燃烧通式</h2><p>首先需要了解有机物在氧气中燃烧的通式，这是推导燃料电池负极反应的基础：</p>
-<p>$$C&#95;xH&#95;yO&#95;z + \left(x + \frac{y}{4} - \frac{z}{2}\right)O&#95;2 \rightarrow xCO&#95;2 + \frac{y}{2}H&#95;2O$$</p>
-<p>即符合 $C&#95;xH&#95;yO&#95;z$ 通式的物质（$x, y, z$ 取值均为自然数）在氧气中燃烧的通式。</p>
-<p>通过此通式配平得到的方程式各项系数不一定为整数，因此需要将其各项系数化为正整数，得到的 $C&#95;xH&#95;yO&#95;z$ 的系数记为 $M$，而 $O&#95;2$ 的系数记为 $N$。</p>
-<p>通过燃烧通式与正极反应相减，可得到以下负极反应方程式。</p>
-<blockquote>
-<p><strong>注意</strong>：因以碱性物质作为电解质的燃料电池产生的 $CO&#95;2$ 会与之反应，故应加上二氧化碳与氢氧根反应通式消去。</p>
-</blockquote>
-<h2 id="负极反应通式"><a href="#负极反应通式" class="headerlink" title="负极反应通式"></a>负极反应通式</h2><h3 id="熔融氧化物电解质"><a href="#熔融氧化物电解质" class="headerlink" title="熔融氧化物电解质"></a>熔融氧化物电解质</h3><p>$$C&#95;xH&#95;yO&#95;z - (4x + y - 2z)e^- + \left(2x + \frac{y}{2} - z\right)O&#95;2 \rightarrow xCO&#95;2 + \frac{y}{2}H&#95;2O$$</p>
-<h3 id="碱性电解质"><a href="#碱性电解质" class="headerlink" title="碱性电解质"></a>碱性电解质</h3><p>$$C&#95;xH&#95;yO&#95;z - (4x + y - 2z)e^- + (6x + y - 2z)OH^- \rightarrow xCO&#95;3^{2-} + (3x + y - 2z)H&#95;2O$$</p>
-<h3 id="酸性电解质"><a href="#酸性电解质" class="headerlink" title="酸性电解质"></a>酸性电解质</h3><p>$$C&#95;xH&#95;yO&#95;z - (4x + y - 2z)e^- + (4x + y - 2z)OH^- \rightarrow xCO&#95;2 + (2x + y - 2z)H&#95;2O$$</p>
-<h3 id="熔融碳酸盐电解质"><a href="#熔融碳酸盐电解质" class="headerlink" title="熔融碳酸盐电解质"></a>熔融碳酸盐电解质</h3><p>$$C&#95;xH&#95;yO&#95;z - (4x + y - 2z)e^- + \left(2x + \frac{y}{2} - z\right)CO&#95;3^{2-} \rightarrow \left(3x + \frac{y}{2} - z\right)CO&#95;2 + \frac{y}{2}H&#95;2O$$</p>
-<p>书写时，方程式内相关系数应扩展相同倍数，此倍数即为 $M$。同样，电池的正极反应式也应扩展相同倍数，此倍数为 $N$。</p>
-<h2 id="正极反应通式"><a href="#正极反应通式" class="headerlink" title="正极反应通式"></a>正极反应通式</h2><p>四种常见电解质对应的正极反应：</p>
-<table>
-<thead>
-<tr>
-<th>电解质类型</th>
-<th>正极反应方程式</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>酸性电解质</td>
-<td>$O&#95;2 + 4H^+ + 4e^- &#x3D; 2H&#95;2O$</td>
-</tr>
-<tr>
-<td>碱性电解质</td>
-<td>$O&#95;2 + 4e^- + 2CO&#95;2 &#x3D; 2CO&#95;3^{2-}$</td>
-</tr>
-<tr>
-<td>熔融氧化物</td>
-<td>$O&#95;2 + 4e^- &#x3D; 2O^{2-}$</td>
-</tr>
-<tr>
-<td>熔融碳酸盐</td>
-<td>$O&#95;2 + 2CO&#95;2 + 4e^- &#x3D; 2CO&#95;3^{2-}$</td>
-</tr>
-</tbody></table>
-<blockquote>
-<p><strong>注意</strong>：碱性电解质溶液为电解质溶液时，需具体情况具体分析。另外附上不与二氧化碳反应的情况：</p>
-</blockquote>
-<p>$$C&#95;xH&#95;yO&#95;z - (4x + y - 2z)e^- + (4x + y - 2z)OH^- \rightarrow xCO&#95;2 + (2x + y - 2z)H&#95;2O$$</p>
-<p>$$O&#95;2 + 4e^- + 2H&#95;2O &#x3D; 4OH^-$$</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>只需记住燃烧通式，配合对应的正极反应式相减，再根据电解质类型调整，即可快速写出各类燃料电池的负极反应方程式。</p>
-]]></content>
-      <tags>
-        <tag>化学</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>热力学全部336个偏导数系统性推导与分类结果（完整版）</title>
     <url>/posts/A0002/</url>
     <content><![CDATA[<h2 id="零、前言"><a href="#零、前言" class="headerlink" title="零、前言"></a>零、前言</h2><p>热力学中共有8个描述系统的核心状态量：压强 $p$、体积 $V$、温度 $T$、熵 $S$、内能 $U$、焓 $H$、自由能 $F$（亥姆霍兹自由能，部分教材记作 $A$）和自由焓 $G$（吉布斯自由能）。<br>从这8个量中任选3个，分别作为被求导量、求导变量和恒定条件，可构成 $\left(\frac{\partial a}{\partial b}\right)&#95;c$ 形式的偏微分，共计 $8 \times 7 \times 6 &#x3D; 336$ 种情况。<br>本文系统给出全部336个偏导数的推导方法与完整分类结果，所有偏微分均可由简单状态量、物态方程系数（体胀系数 $\alpha$、压缩系数 $\kappa$、压强系数 $\beta$）和热容系数（$C&#95;p$、$C&#95;v$、$\gamma$）表示。</p>
@@ -441,6 +256,191 @@
 <li>热力学势的凹凸性由熵最大原理导出，勒让德变换翻转共轭变量方向的凹凸性，对应系统的平衡稳定性条件。</li>
 </ol>
 <p>这一体系为物理化学、工程热力学的科研与教学提供了完整的偏微分查阅工具，借助易测量物理量可间接推导难以直接观测的热力学特性。</p>
+]]></content>
+      <tags>
+        <tag>化学</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>用 Python 绘制盈亏月相：从直觉误区到闭合多边形方案</title>
+    <url>/posts/T0001/</url>
+    <content><![CDATA[<blockquote>
+<p>初衷很简单：给定任意日期，画出一轮和现实一致的月亮——盈亏大小、月牙朝向都贴合肉眼所见。<br>最开始我本能想到用两个圆裁切，一路踩坑，最后找到了一套简洁自洽的实现思路。整个过程整理于此，希望能帮后来者少走弯路。</p>
+</blockquote>
+<h2 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h2><p>我想用 Python 画月亮。不是随手画一个圆形贴纸，而是<strong>由日期驱动的真实月相</strong>：什么时候是细月牙、什么时候是弦月、亮面朝左还是朝右，都和我们抬头看见的一致。</p>
+<p>一开始以为这是个小任务。从「两个圆互相裁剪」这个很自然的想法起步，一路碰壁，最后收敛到一套足够优雅的算法。我把完整思考链路记录下来。</p>
+<h2 id="一、先厘清核心：月相的成因"><a href="#一、先厘清核心：月相的成因" class="headerlink" title="一、先厘清核心：月相的成因"></a>一、先厘清核心：月相的成因</h2><p>动笔写代码之前，得先分清一件极易混淆的事：<br><strong>日常的阴晴圆缺，不是地球影子挡住月亮（那是月食，一年仅有少数几次）。</strong></p>
+<p>月球本身不发光，只有朝向太阳的半球被照亮。我们站在地球上观察，看到的亮面占比随相对角度持续变化，这就是月相。<br>我们用<strong>相位角</strong>描述太阳-月球-地球三者的几何关系：</p>
+<table>
+<thead>
+<tr>
+<th>相位角</th>
+<th>月相</th>
+<th>简要说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0°</td>
+<td>新月（朔）</td>
+<td>几乎不可见，日月同升同落</td>
+</tr>
+<tr>
+<td>0°–90°</td>
+<td>蛾眉月</td>
+<td>右侧细月牙，傍晚见于西天</td>
+</tr>
+<tr>
+<td>90°</td>
+<td>上弦月</td>
+<td>右半侧明亮</td>
+</tr>
+<tr>
+<td>90°–180°</td>
+<td>盈凸月</td>
+<td>持续向满月靠近</td>
+</tr>
+<tr>
+<td>180°</td>
+<td>满月（望）</td>
+<td>整个月面全亮</td>
+</tr>
+<tr>
+<td>180°–270°</td>
+<td>亏凸月</td>
+<td>亮面逐步缩小</td>
+</tr>
+<tr>
+<td>270°</td>
+<td>下弦月</td>
+<td>左半侧明亮</td>
+</tr>
+<tr>
+<td>270°–360°</td>
+<td>残月</td>
+<td>左侧细月牙，凌晨见于东天</td>
+</tr>
+</tbody></table>
+<p>新月到下一次新月的平均周期为 <strong>29.530588853 天</strong>，称为<strong>朔望月</strong>。<br>选定一个已知新月的儒略日作为基准，用当前儒略日对朔望月取模，即可得到月龄，换算相位角。下面是最简版本的计算公式：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">SYNODIC_MONTH = <span class="number">29.530588853</span></span><br><span class="line">REFERENCE_NEW_MOON_JD = <span class="number">2451550.1</span></span><br><span class="line">moon_age = (jd - REFERENCE_NEW_MOON_JD) % SYNODIC_MONTH</span><br><span class="line">phase_angle = moon_age / SYNODIC_MONTH * <span class="number">360.0</span></span><br></pre></td></tr></table></figure>
+
+<p>还有一个实用公式，用来计算亮面占整个月轮的比例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">照亮占比 = (1 - cos(相位角)) / 2</span><br></pre></td></tr></table></figure>
+<p>在 0°、180° 分别得到 0 和 100%；90°、270° 刚好 50%，和上弦、下弦月对半亮的观感吻合。</p>
+<h2 id="二、第一思路：双圆裁切，看似可行，实则走不通"><a href="#二、第一思路：双圆裁切，看似可行，实则走不通" class="headerlink" title="二、第一思路：双圆裁切，看似可行，实则走不通"></a>二、第一思路：双圆裁切，看似可行，实则走不通</h2><p>拿到相位角之后，最先冒出来的想法非常直观：<br>满月是一个整圆；想要月牙，就叠加另一个圆形盖住一部分，剩下露出的区域就是月相。弦月看上去，本来就像是两段圆弧围出来的形状。</p>
+<p>但真正动手才发现这个方案有两处硬伤：</p>
+<ol>
+<li><strong>形状本身不对</strong>：双圆裁切得到的明暗分界线是圆弧；而真实月面的明暗交界线（晨昏线&#x2F;terminator）曲率是连续变化的，90°弦月时会退化成一条直线。无论怎么调整两个圆的大小位置，都无法复刻这条边界。</li>
+<li><strong>绘图原语受限</strong>：常规绘图库的圆弧接口只能绘制固定片段，很难精准取出任意一段弧，再和另一段弧线无缝拼接成可填充的闭合图形。</li>
+</ol>
+<p>这个方案就此搁置。</p>
+<h2 id="三、修正认知：明暗分界线，是一个椭圆的半弧"><a href="#三、修正认知：明暗分界线，是一个椭圆的半弧" class="headerlink" title="三、修正认知：明暗分界线，是一个椭圆的半弧"></a>三、修正认知：明暗分界线，是一个椭圆的半弧</h2><p>跳出「两个圆」的思维定式，从三维几何重新理解：<br>月球是球体，太阳光在球面上切出的明暗分界是球面上的大圆。<strong>这个大圆投影到我们的观测平面上，就是椭圆。</strong> 我们肉眼看到的明暗界线，本质上是这个椭圆的一半，椭圆的扁率随着相位角持续改变。</p>
+<p>设月球视半径为 <code>R</code>、相位角为 <code>θ</code>，该椭圆的半横轴长度为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">半横轴 = R · cos θ</span><br></pre></td></tr></table></figure>
+
+<p>代入几个极值验证，逻辑自洽：</p>
+<ul>
+<li><code>θ = 0°</code>（新月）：<code>cosθ=1</code>，分界线和月轮外缘重合，几乎没有亮面；</li>
+<li><code>θ = 90°</code>（上弦月）：<code>cosθ=0</code>，椭圆坍缩为一条竖直线，正好对半照亮；</li>
+<li><code>θ = 180°</code>（满月）：<code>cosθ=-1</code>，分界线翻转到另一侧外缘，整轮全部亮起。</li>
+</ul>
+<p>公式里的负号是关键：它代表明暗边界翻转到对面，对应月相由盈转亏。</p>
+<p>到这里，亮区的几何定义已经清晰：<strong>外侧是月轮的一段圆弧，内侧是半段椭圆弧，两段弧线共同围成亮区。</strong><br>但新问题又来了：两段弧线在上下极点处相切，直接拼接填充极易出现细微缝隙；同时又回到老问题——绘图工具很难直接拼接两段不同类型的弧线。</p>
+<h2 id="四、放弃弧线拼接：采样点位，生成一条闭合多边形"><a href="#四、放弃弧线拼接：采样点位，生成一条闭合多边形" class="headerlink" title="四、放弃弧线拼接：采样点位，生成一条闭合多边形"></a>四、放弃弧线拼接：采样点位，生成一条闭合多边形</h2><p>既然用弧线拼接的路子处处受限，我换了策略：不再组合图形原语，直接构造一条连续的闭合轮廓。</p>
+<p>分别对外侧月轮边缘、内侧明暗椭圆界线进行等角度采样，得到两组坐标点；再把界线的点位倒序拼接，首尾相连，形成一条不自交的闭合路径。直接填充这个多边形，不需要依赖弧线接口，也从根源避免拼接缝隙。</p>
+<p>在参数 <code>t</code> 对应的高度位置，外缘和明暗界线横坐标：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">外缘（月轮边缘 limb）： x = ±R·sin t</span><br><span class="line">明暗界线（晨昏线 terminator）：x = ±R·cos θ·sin t</span><br></pre></td></tr></table></figure>
+<p>正负号由相位角判定：<code>θ &lt; 180°</code>，亮区在右侧，取正；反之亮区在左侧，取负。<br>采样、拼合路径的核心函数：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">_lit_polygon</span>(<span class="params">angle, center, radius</span>):</span><br><span class="line">    k = math.cos(math.radians(angle))</span><br><span class="line">    steps = <span class="built_in">max</span>(<span class="number">360</span>, <span class="built_in">int</span>(radius))</span><br><span class="line">    limb, terminator = [], []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(steps + <span class="number">1</span>):</span><br><span class="line">        t = math.pi * i / steps</span><br><span class="line">        y = center - radius * math.cos(t)</span><br><span class="line">        sin_t = math.sin(t)</span><br><span class="line">        <span class="keyword">if</span> angle &lt; <span class="number">180</span>:</span><br><span class="line">            <span class="comment"># 亮面朝右</span></span><br><span class="line">            limb.append((center + radius * sin_t, y))</span><br><span class="line">            terminator.append((center + radius * k * sin_t, y))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 亮面朝左</span></span><br><span class="line">            limb.append((center - radius * sin_t, y))</span><br><span class="line">            terminator.append((center - radius * k * sin_t, y))</span><br><span class="line">    <span class="comment"># 界线点位反向拼接，在极点闭合轮廓</span></span><br><span class="line">    <span class="keyword">return</span> limb + terminator[::-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<p>轮廓线条要放在填充之后绘制，防止轮廓线覆盖、切断月牙两极的收口。</p>
+<h2 id="五、图像干净度的关键：先超采样、变换，最后一次性二值化"><a href="#五、图像干净度的关键：先超采样、变换，最后一次性二值化" class="headerlink" title="五、图像干净度的关键：先超采样、变换，最后一次性二值化"></a>五、图像干净度的关键：先超采样、变换，最后一次性二值化</h2><p>我想要干净锐利、适合用作图标、素材的黑白月相图。二值图最容易踩的坑是操作顺序颠倒：先压缩成黑白，再做旋转，弧线会出现严重锯齿，细轮廓甚至断裂。</p>
+<p>正确的流水线顺序固定为四步，顺序不能调换：</p>
+<ol>
+<li>在 4 倍超采样的高画布上绘制多边形，保留灰度过渡余量；</li>
+<li>在高分辨率画布上执行旋转（BICUBIC 插值）；</li>
+<li>降采样到目标尺寸（LANCZOS，保证边缘平滑）；</li>
+<li>最后只做一次二值化：亮度≥128置白，其余透明。</li>
+</ol>
+<p>4倍超采样是性价比很高的选择，倍率再高，画质提升有限，但运算成本成倍上涨。核心原则：<strong>所有几何变换，都要在灰度高分辨率阶段完成，二值化放在最后一步。</strong></p>
+<h2 id="六、朝向：月相倾角和观测纬度有关，南北半球观感翻转"><a href="#六、朝向：月相倾角和观测纬度有关，南北半球观感翻转" class="headerlink" title="六、朝向：月相倾角和观测纬度有关，南北半球观感翻转"></a>六、朝向：月相倾角和观测纬度有关，南北半球观感翻转</h2><p>形状算法搞定之后，还有一个很容易忽略的变量：月亮的倾斜角度。<br>同一个时刻的月亮，在赤道、我国北方、南半球悉尼看到的朝向并不一样：</p>
+<ul>
+<li>观测纬度决定月面整体的倾斜角度；</li>
+<li>南半球的观感不是轻微偏转，而是整体上下翻转。</li>
+</ul>
+<p>简易旋转计算：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">rotation = -lat</span><br><span class="line"><span class="keyword">if</span> lat &lt; <span class="number">0</span>:</span><br><span class="line">    rotation += <span class="number">180.0</span></span><br></pre></td></tr></table></figure>
+<p>再次强调：旋转操作必须放在高分辨率超采样阶段，不能在已经二值化的低分辨率图上旋转，否则锯齿、断线问题会复现。</p>
+<h2 id="七、精度取舍：平均朔望月够用吗？什么时候要接入星历？"><a href="#七、精度取舍：平均朔望月够用吗？什么时候要接入星历？" class="headerlink" title="七、精度取舍：平均朔望月够用吗？什么时候要接入星历？"></a>七、精度取舍：平均朔望月够用吗？什么时候要接入星历？</h2><p>到这一步，月亮的视觉效果已经足够逼真，但前面的相位角，还在用线性的平均朔望月公式计算。<br>这套简化模型误差大约半天。对于画图本身完全无感：在一百多像素的图上，半天对应的相位误差只有 2°左右，肉眼分辨不出差别。</p>
+<p>促使我放弃简化公式的不是图像，而是附加信息：我还需要在图上标注「下次满月：xx点xx分」这类时间。<br>实测对比：真实满月 UTC 时刻为 04:12，均值公式算出是前一日 23:45，偏差约4.4小时；新月的误差甚至能接近11小时。弧线看不出差别，但给到用户阅读的时间标签，差几个小时就是硬错误。</p>
+<p>于是引入 JPL DE421 星历：直接读取太阳、月球的真实位置，用黄经差计算精确相位角；新月、满月时刻用二分法求解，精度收敛到分钟级别，误差从小时级压缩到十几秒。<br>代价是引入十几MB的星历文件和天文计算依赖，所以代码做了降级兜底：星历缺失、依赖不可用时，自动回退到朔望月平均公式，图像照常生成，只是时间标签回到有几小时误差的状态。</p>
+<p>这里得到一个很有意思的结论：精度需求，不由图片分辨率决定，而是由输出信息的用途决定。画一轮月牙，2°的误差无关紧要；标注一个具体时刻，几小时偏差就无法接受。</p>
+<h2 id="八、小结"><a href="#八、小结" class="headerlink" title="八、小结"></a>八、小结</h2><p>回看整个实现过程，真正的突破不是某个复杂公式，而是两次思路转换：</p>
+<ol>
+<li>从「用多个基础图形拼接月相」，转为「直接采样轮廓点，构造一条闭合多边形」。弧线本身很难组合，采样点的路径方案绕开了绘图原语的限制；</li>
+<li>从「先二值化再变换」，转为「全部几何变换前置，二值化放在最后一步」，锯齿、轮廓断裂这些表象问题，找到了底层原因。</li>
+</ol>
+<p>最终画出来的月亮并不大，通常只有一百多像素，当然渲染不出环形山。但它能在对应的日期、对应观测地点，呈现出正确的盈亏形态与倾斜朝向。对一段 Python 写出来的小可视化来说，这就足够了。</p>
+]]></content>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>你为什么考不上985 211？</title>
+    <url>/posts/Z0001/</url>
+    <content><![CDATA[<p>如果想得不深入，始终停留在表层，那最终得出的结论也是垃圾。<br>普通学校的高中生考不了985 211，这只是一个表面现象，实际上应该是，普通学校的高中生，在被身边的垃圾和傻逼们同化的情况下，跟着普通学校的垃圾老师去学，跟着普通学校的进度去学，考不了985 211。<br>智商其实并不是最关键的因素，平台或者说环境才是，当你因为初中作死，中考失利考进这所烂高中的时候(想想你为什么会失利，因为你初中就是个垃圾学校)，其实就已经与你身边的垃圾和傻逼们一样，步入了相似的命运轨迹，如果你非要沿着这条和别人高度相似的命运轨迹走下去，没有掀桌子的勇气，得过且过，那自然考不了985 211。<br>普通学校学生难上211 985有三大障碍，首先是老师，如果学会正视老师，破除对老师的盲目崇拜，就会发现老师其实也就两种功能，第一种功能是把课本上的基础知识介绍给你，很多学校的老师就连这一点都做不好，板书还要对着教案照猫画虎的，直接引用课本原文不管你们听不听得懂的，念教辅念PPT的，基本就这种类型，在这种人手下你不自学，不自己折腾，还怀着不知道被谁灌输的“只要踏踏实实跟着老师学，就能怎么怎么样”这样单纯的想法，想出人头地，是根本不可能的，第二种是教你学会应试，可问题在于很多老师自己都不会应试，高考成绩本身就那个逼样，凭着不知道哪里听来的经验瞎扯一通就完事了嗷（比如哪哪状元背了十遍历史书什么的），其次是你身边的傻逼们，傻逼们聚在一起，是不会产生化学反应诞生出天才来的，而且还会把你同化，变得和他们一样傻逼，你要是有点进取心，想做出点改变，他们就会跟看见什么稀奇玩意似的，立马凑上来烦死你，心理变态点的还会想办法整你，毕竟这个班，不允许有比傻逼们牛逼的人存在，成功者永远是少数，想成功绝对得跟身边的傻逼们不一样，在学习这件事上划清界限（当然不等于要跟人家闹翻）<br>最后就是垃圾的学校，学校垃圾就没有钱，也就舍不得花钱买质量高的练习册（搞不好还要吃点回扣什么的），解析几个字就一笔带过，看不懂拉倒恶性循环，学校垃圾老师也垃圾，出出来的题目也是垃圾，简单得要死，很多人做这种垃圾题目考得不错还自以为很牛逼，大考的时候才知道自己有多垃圾，一个月考一次，有时候还不考，连周考都没有，学生能不能从仅有的几次考试中培养出应试能力关我屁事，差不多就这样，普通人跟着这种进度走，能考211 985就见鬼了。<br>不过有一说一，烂学校或者好学校里的烂班级有一点好，那就是自由（当然你们学校又垃圾管得又严当我没说），这其实是一个巨大的机会，就看你抓不抓得住了，因为这种所谓的自由给了聪明人，自主选择老师，自主安排进度，自主选择练习题和试卷，自主实验学习方法的机，如果你所在的学校很牛逼，但是老师不对你胃口（虽然人家可能很牛逼），大家的进度你跟不上，作业和考试多得你想吐，连整理的时间都没有，因为各种原因感到压抑，那么你调整的空间就不会很大，甚至一步错步步错，自主选择老师，自主安排进度，自主选择练习题和试卷，自主实验学习方法其实很简单，网课到处都是，学霸们平时怎么学，衡水中学的日程表网上也有，好的练习册不会淘宝？名校的模拟题不会自己去找？<br>道理就摆在这儿，至于最后能不能做到，那就是你自己的事了。</p>
+]]></content>
+      <tags>
+        <tag>牢骚</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于燃料电池负极反应方程式的简便书写方式</title>
+    <url>/posts/A0001/</url>
+    <content><![CDATA[<h2 id="有机物燃烧通式"><a href="#有机物燃烧通式" class="headerlink" title="有机物燃烧通式"></a>有机物燃烧通式</h2><p>首先需要了解有机物在氧气中燃烧的通式，这是推导燃料电池负极反应的基础：</p>
+<p>$$C&#95;xH&#95;yO&#95;z + \left(x + \frac{y}{4} - \frac{z}{2}\right)O&#95;2 \rightarrow xCO&#95;2 + \frac{y}{2}H&#95;2O$$</p>
+<p>即符合 $C&#95;xH&#95;yO&#95;z$ 通式的物质（$x, y, z$ 取值均为自然数）在氧气中燃烧的通式。</p>
+<p>通过此通式配平得到的方程式各项系数不一定为整数，因此需要将其各项系数化为正整数，得到的 $C&#95;xH&#95;yO&#95;z$ 的系数记为 $M$，而 $O&#95;2$ 的系数记为 $N$。</p>
+<p>通过燃烧通式与正极反应相减，可得到以下负极反应方程式。</p>
+<blockquote>
+<p><strong>注意</strong>：因以碱性物质作为电解质的燃料电池产生的 $CO&#95;2$ 会与之反应，故应加上二氧化碳与氢氧根反应通式消去。</p>
+</blockquote>
+<h2 id="负极反应通式"><a href="#负极反应通式" class="headerlink" title="负极反应通式"></a>负极反应通式</h2><h3 id="熔融氧化物电解质"><a href="#熔融氧化物电解质" class="headerlink" title="熔融氧化物电解质"></a>熔融氧化物电解质</h3><p>$$C&#95;xH&#95;yO&#95;z - (4x + y - 2z)e^- + \left(2x + \frac{y}{2} - z\right)O&#95;2 \rightarrow xCO&#95;2 + \frac{y}{2}H&#95;2O$$</p>
+<h3 id="碱性电解质"><a href="#碱性电解质" class="headerlink" title="碱性电解质"></a>碱性电解质</h3><p>$$C&#95;xH&#95;yO&#95;z - (4x + y - 2z)e^- + (6x + y - 2z)OH^- \rightarrow xCO&#95;3^{2-} + (3x + y - 2z)H&#95;2O$$</p>
+<h3 id="酸性电解质"><a href="#酸性电解质" class="headerlink" title="酸性电解质"></a>酸性电解质</h3><p>$$C&#95;xH&#95;yO&#95;z - (4x + y - 2z)e^- + (4x + y - 2z)OH^- \rightarrow xCO&#95;2 + (2x + y - 2z)H&#95;2O$$</p>
+<h3 id="熔融碳酸盐电解质"><a href="#熔融碳酸盐电解质" class="headerlink" title="熔融碳酸盐电解质"></a>熔融碳酸盐电解质</h3><p>$$C&#95;xH&#95;yO&#95;z - (4x + y - 2z)e^- + \left(2x + \frac{y}{2} - z\right)CO&#95;3^{2-} \rightarrow \left(3x + \frac{y}{2} - z\right)CO&#95;2 + \frac{y}{2}H&#95;2O$$</p>
+<p>书写时，方程式内相关系数应扩展相同倍数，此倍数即为 $M$。同样，电池的正极反应式也应扩展相同倍数，此倍数为 $N$。</p>
+<h2 id="正极反应通式"><a href="#正极反应通式" class="headerlink" title="正极反应通式"></a>正极反应通式</h2><p>四种常见电解质对应的正极反应：</p>
+<table>
+<thead>
+<tr>
+<th>电解质类型</th>
+<th>正极反应方程式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>酸性电解质</td>
+<td>$O&#95;2 + 4H^+ + 4e^- &#x3D; 2H&#95;2O$</td>
+</tr>
+<tr>
+<td>碱性电解质</td>
+<td>$O&#95;2 + 4e^- + 2CO&#95;2 &#x3D; 2CO&#95;3^{2-}$</td>
+</tr>
+<tr>
+<td>熔融氧化物</td>
+<td>$O&#95;2 + 4e^- &#x3D; 2O^{2-}$</td>
+</tr>
+<tr>
+<td>熔融碳酸盐</td>
+<td>$O&#95;2 + 2CO&#95;2 + 4e^- &#x3D; 2CO&#95;3^{2-}$</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>注意</strong>：碱性电解质溶液为电解质溶液时，需具体情况具体分析。另外附上不与二氧化碳反应的情况：</p>
+</blockquote>
+<p>$$C&#95;xH&#95;yO&#95;z - (4x + y - 2z)e^- + (4x + y - 2z)OH^- \rightarrow xCO&#95;2 + (2x + y - 2z)H&#95;2O$$</p>
+<p>$$O&#95;2 + 4e^- + 2H&#95;2O &#x3D; 4OH^-$$</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>只需记住燃烧通式，配合对应的正极反应式相减，再根据电解质类型调整，即可快速写出各类燃料电池的负极反应方程式。</p>
 ]]></content>
       <tags>
         <tag>化学</tag>

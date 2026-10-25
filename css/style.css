@@ -197,7 +197,7 @@ main {
   align-items: center;
   height: 40px;
   padding: 0 var(--sp-2);
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   font-weight: 500;
   color: var(--geist-secondary);
   border-radius: var(--geist-radius);
@@ -229,7 +229,7 @@ main {
   gap: var(--sp-1);
   height: 40px;
   padding: 0 var(--sp-2);
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   font-weight: 400;
   color: var(--geist-quaternary);
   background: var(--geist-background);
@@ -1009,11 +1009,21 @@ main {
   line-height: 1.7;
   color: var(--geist-secondary);
   overflow-wrap: break-word;
+  /* 中文断行遵守避头尾规则，避免「。」「，」等标点单独成行 */
+  line-break: strict;
 }
 
 .content p {
   margin-bottom: var(--sp-3);
+  text-align: justify;
+  text-justify: inter-character;
   text-wrap: pretty;
+}
+
+.content li,
+.content blockquote {
+  text-align: justify;
+  text-justify: inter-character;
 }
 
 .content h1,
