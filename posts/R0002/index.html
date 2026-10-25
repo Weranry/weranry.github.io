@@ -21,6 +21,13 @@
       },
       chtml: {
         matchFontHeight: false
+      },
+      startup: {
+        pageReady: function () {
+          return MathJax.startup.defaultPageReady().then(function () {
+            if (window.__glueMathPunct) window.__glueMathPunct();
+          });
+        }
       }
     };
   </script>
@@ -305,6 +312,28 @@
       localStorage.setItem('theme', next);
     });
   })();
+  </script>
+
+  <script>
+  // 公式后紧跟闭合标点时，把「公式 + 标点」包进不可断行的 span，
+  // 避免「。」被挤到下一行单独成行（浏览器避头尾规则对原子内联元素失效）
+  window.__glueMathPunct = function() {
+    var PUNCT = /^[。，、；：！？）》」』]/;
+    document.querySelectorAll('.content p, .content li, .content blockquote').forEach(function(el) {
+      el.querySelectorAll('mjx-container:not([display="true"])').forEach(function(m) {
+        var next = m.nextSibling;
+        if (!next || next.nodeType !== 3 || !PUNCT.test(next.nodeValue)) return;
+        var span = document.createElement('span');
+        span.style.whiteSpace = 'nowrap';
+        m.parentNode.insertBefore(span, m);
+        span.appendChild(m);
+        var text = next.nodeValue;
+        var take = PUNCT.test(text.charAt(1)) ? 2 : 1;
+        span.appendChild(document.createTextNode(text.slice(0, take)));
+        next.nodeValue = text.slice(take);
+      });
+    });
+  };
   </script>
 </body>
 </html>

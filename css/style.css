@@ -64,7 +64,7 @@
   --text-3xl: 40px;
 
   --layout-max: 1200px;
-  --content-max: 680px;
+  --content-max: 720px;
 }
 
 [data-theme="dark"] {
@@ -197,7 +197,7 @@ main {
   align-items: center;
   height: 40px;
   padding: 0 var(--sp-2);
-  font-size: var(--text-base);
+  font-size: var(--text-lg);
   font-weight: 500;
   color: var(--geist-secondary);
   border-radius: var(--geist-radius);
@@ -1016,14 +1016,11 @@ main {
 .content p {
   margin-bottom: var(--sp-3);
   text-align: justify;
-  text-justify: inter-character;
-  text-wrap: pretty;
 }
 
 .content li,
 .content blockquote {
   text-align: justify;
-  text-justify: inter-character;
 }
 
 .content h1,
@@ -1628,8 +1625,8 @@ main {
   }
 
   .header-nav a {
-    padding: 0 var(--sp-1);
-    font-size: var(--text-sm);
+    padding: 0 calc(var(--sp-1) / 2);
+    font-size: var(--text-base);
   }
 
   .home-wrap {
